@@ -1,5 +1,5 @@
 from flask import Blueprint
-
+from flask import render_template
 job = Blueprint('job', __name__, url_prefix='/job')
 
 
@@ -14,7 +14,8 @@ def JobListView():
     职位列表
     :return:
     """
-    return 'JobList'
+    job = job.query_all()
+    return render_template('/job/joblist.html',joblist=joblist)
 
 
 @job.route('/detail/<int:id>', methods=["GET", "POST"])
