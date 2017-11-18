@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <!-- 页面主体START -->
+
+    <div class="container clearfix  has-login-toolbar " id="container">
+        <div class="contain-header">
+            <!-- 搜索 -->
+            <div class="search-wrapper">
+                <div id="search_box" class="search_box" data-lg-tj-track-code="index_search" data-lg-tj-track-type="1">
+                    <form id="searchForm" class="searchForm clearfix" name="searchForm"
+                          action="h" method="get">
+                        <input type="text" id="search_input" class="search_input" tabindex="1" maxlength="64"
+                               autocomplete="off" value="" placeholder="搜索职位、公司或地点"/>
+                        <input type="hidden" name="labelWords" id="labelWords" value=""/>
+                        <input type="hidden" name="fromSearch" id="fromSearch" value="true"/>
+                        <input type="hidden" name="suginput" id="suginput"/>
+
+                        <input type="submit" id="search_button" class="search_button" value="搜索" data-lg-tj-id="4V00"
+                               data-lg-tj-no="idnull" data-lg-tj-cid="idnull"/>
+                    </form>
+                    <input type="hidden" id="search_py" value=""/>
+                    <input type="hidden" id="isIndex" value="true"/>
+                </div>
+                <div class="pos-guess-wrapper">
+                    <div class="guess_wrapper dn">
+                        <span>猜你要搜</span>
+                        <ul></ul>
+                    </div>
+                </div>
+                <dl class="hotSearch" data-lg-tj-track-code="index_hotsearch" data-lg-tj-track-type="1"></dl>
+            </div>
+
+        </div>
+        <div class="container-body">
+            <div class="clearfix">
+                <div id="sidebar" class="sidebar" data-lg-tj-track-code="index_navigation" data-lg-tj-track-type="1">
+                    <div class="mainNavs">
+                        <div class="menu_box">
+                            <div class="menu_main job_hopping">
+                                <div class="category-list">
+                                    <h2>
+                                        技术
+                                    </h2>
+                                    <a href="https://www.lagou.com/zhaopin/Java/" data-lg-tj-id="4A00"
+                                       data-lg-tj-no="0001" data-lg-tj-cid="idnull">Java</a>
+                                    <a href="https://www.lagou.com/zhaopin/PHP/" data-lg-tj-id="4A00"
+                                       data-lg-tj-no="0002" data-lg-tj-cid="idnull">PHP</a>
+                                    <a href="https://www.lagou.com/zhaopin/C++/" data-lg-tj-id="4A00"
+                                       data-lg-tj-no="0003" data-lg-tj-cid="idnull">C++</a>
+                                    <a href="https://www.lagou.com/zhaopin/Android/" data-lg-tj-id="4A00"
+                                       data-lg-tj-no="0004" data-lg-tj-cid="idnull">Android</a>
+                                    <a href="https://www.lagou.com/zhaopin/iOS/" data-lg-tj-id="4A00"
+                                       data-lg-tj-no="0005" data-lg-tj-cid="idnull">iOS</a>
+                                    <a href="https://www.lagou.com/zhaopin/shujuwajue/" data-lg-tj-id="4A00"
+                                       data-lg-tj-no="0006" data-lg-tj-cid="idnull">数据挖掘</a>
+                                    <a href="https://www.lagou.com/zhaopin/shenduxuexi/" data-lg-tj-id="4A00"
+                                       data-lg-tj-no="0007" data-lg-tj-cid="idnull">深度学习</a>
+                                    <a href="https://www.lagou.com/zhaopin/ziranyuyanchuli/" data-lg-tj-id="4A00"
+                                       data-lg-tj-no="0008" data-lg-tj-cid="idnull">自然语言处理</a>
+                                    <i class="arrow"></i>
+                                </div>
+                            </div>
+{% endblock %}

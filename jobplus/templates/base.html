@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- meta -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="renderer" content="webkit">
+    <meta charset="UTF-8">
+    <meta content="互联网招聘,找工作,招聘网,人才网" name="keywords">
+    <meta content="找工作，找工作，找工作" name="description">
+    <title>JobPlus</title>
+    <link rel="Shortcut Icon" href="//static.lagou.com/www/static/common/static/favicon_faed927.ico">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/mcustomscrollbar.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/layout.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/main.html.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/widgets.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/main2.html.css') }}"/>
+    {% block css %}{% endblock %}
+</head>
+
+<input type="hidden" value="" name="userid" id="userid"/>
+<div id="lg_header">
+    <!--C端头部黑色导航-->
+    <div id="lg_tbar">
+        <div class="inner">
+            <div class="lg_tbar_l">
+                <a rel="nofollow" href="https://www.lagou.com/app/download.html" class="lg_app" data-lg-tj-id="5500"
+                   data-lg-tj-no="idnull" data-lg-tj-cid="idnull" target="_blank">拉勾APP</a>
+                <a rel="nofollow" href="https://easy.lagou.com/dashboard/index.htm?from=c_index" class="lg_os"
+                   data-lg-tj-id="5600" data-lg-tj-no="idnull" data-lg-tj-cid="idnull"
+                   data-lg-tj-track-code="index_qiyeban">进入企业版</a>
+            </div>
+            <ul class="lg_tbar_r">
+                <li>
+                    <a href="" data-lg-tj-id="5f00" data-lg-tj-no="idnull" data-lg-tj-cid="idnull"
+                       rel="nofollow">登录</a>
+                </li>
+                <li>
+                    <a href="" class="bl" data-lg-tj-id="5g00" data-lg-tj-no="idnull"
+                       data-lg-tj-cid="idnull" rel="nofollow">注册</a>
+                </li>
+            </ul>
+        </div>
+    </div><!--end #lg_tbar-->
+    <!--C端头部白色导航-->
+    <div id="lg_tnav">
+        <div class="inner">
+            <div class="lg_tnav_l">
+                <a href="https://www.lagou.com/" class="lg_logo" data-lg-tj-id="5h00" data-lg-tj-no="idnull"
+                   data-lg-tj-cid="idnull">
+                    <h1>JOBPLUS</h1>
+                </a>
+                {#                <div class="suggestCity"><strong>全国站</strong><em id="changeCity_btn">[切换城市]</em></div>#}
+            </div>
+            <ul class="lg_tnav_wrap">
+                <li>
+                    <a href="{{ url_for('front.index') }}" class="current" data-lg-tj-id="5i00" data-lg-tj-no="idnull"
+                       data-lg-tj-cid="idnull">首页</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('company.index') }}" data-lg-tj-id="5j00" data-lg-tj-no="idnull"
+                       data-lg-tj-cid="idnull" data-lg-tj-track-code="index_company">公司</a>
+                </li>
+                <li>
+                    <a rel="nofollow" href="" data-lg-tj-id="19xc" data-lg-tj-no="idnull"
+                       data-lg-tj-cid="idnull" target="_blank" data-lg-tj-track-code="index_campus">职位</a>
+                </li>
+                <li>
+            </ul>
+        </div>
+    </div><!--end #lg_tnav-->
+</div><!--end #header-->
+<input type="hidden" id="serverTime" value="1510972132890"/>
+
+
+{% block body %}{% endblock %}
+
+
+<script type="text/javascript" src="{{ url_for('static',filename='js/lg-analytics_ea85146.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static',filename='js/oss.js') }}"></script>
+
+{% block js %}{% endblock %}
+
+</html>
+
