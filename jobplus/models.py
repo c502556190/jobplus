@@ -71,7 +71,8 @@ class Jobs(Base):
     __tablename__ = 'job_jobs'
     id = db.Column(db.Integer, primary_key=True)
     jobs_name = db.Column(db.String(50), unique=True, index=True, nullable=False)
-    company_id = db.Column(db.Integer)  # 企业id
+    company_id = db.Column(db.Integer,ForeignKey=('job_company.id'))  # 企业id
+    company = relationship('job_company')
     company_addtime = db.Column(db.Integer)  # 企业添加时间
     company_audit = db.Column(db.Integer)
     sex = db.Column(db.String(3))  # 性别

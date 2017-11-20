@@ -2,10 +2,10 @@
 {% block body %}
     <div class="row"> 
         {% for joblist in joblist %}
-        <p>{{ "#" }}</p>
-        <p>{{ "#" }}</p>
-        <p>{{ "#" }}</p>
-        <p>{{ "#" }}</p>
-        <p>{{ "#" }}</p>
-        <p>{{ "#" }}</p>
+        <p>job_name: {{ joblist.jobs_name  }}</p>
+        <p>salary:{{ joblist.salary }}</p>
+        <p>experience:{{ joblist.experience }}</p>
+        <p>work_place:{{ joblist.company.work_place }}</p>
+        <p>work_introduction:{{ joblist.company.work_introduction }}</p>
+        <p>work_updatetime:{{ joblist.company_addtime }}</p>
 {% endblock %}

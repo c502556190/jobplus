@@ -15,7 +15,7 @@ def JobListView():
     :return:
     """
     job = job.query_all()
-    return render_template('/job/joblist.html',joblist=joblist)
+    return render_template('/job/joblist.html',job=joblist)
 
 
 @job.route('/detail/<int:id>', methods=["GET", "POST"])
