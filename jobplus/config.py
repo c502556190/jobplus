@@ -12,7 +12,7 @@ class DevelopmentConfig(BaseConfig):
     开发环境
     """
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root@localhost:3306/jobplus?charset=utf8'
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root@127.0.0.1:3306/jobplus?charset=utf8'
     SQLALCHEMY_TRACK_MODIFICATIONS = True
 
 
@@ -25,7 +25,8 @@ class TestingConfig(BaseConfig):
 
 
 configs = {
-    'developemt': DevelopmentConfig,
+    'development': DevelopmentConfig,
     'production': ProductionConfig,
     'testing': TestingConfig
 }
+
