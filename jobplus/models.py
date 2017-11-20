@@ -71,7 +71,6 @@ class Jobs(Base):
     __tablename__ = 'job_jobs'
     id = db.Column(db.Integer, primary_key=True)
     jobs_name = db.Column(db.String(50), unique=True, index=True, nullable=False)
-    companyname = db.Column(db.String(50))  # 企业名称
     company_id = db.Column(db.Integer)  # 企业id
     company_addtime = db.Column(db.Integer)  # 企业添加时间
     company_audit = db.Column(db.Integer)
@@ -79,7 +78,8 @@ class Jobs(Base):
     age = db.Column(db.String(10))  # 年龄
     education = db.Column(db.String(30))  # 教育程度
     experience = db.Column(db.String(30))  # 工作经验
-
+    salary = db.Column(db.Integer)  #薪资
+    recruit_amount = db.Column(db.Integer) # 招聘数量
     def __repr__(self):
         return '<Jobs:{}>'.format(self.jobs_name)
 
@@ -89,8 +89,10 @@ class Company(Base):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), unique=True, index=True, nullable=False)
-    company_info = db.Column(db.String(100))  # 企业简介
-
+    company_info = db.Column(db.String(100))  #一句话 企业简介
+    company_website = db.Column(db.string(100))# 企业网址
+    work_place = db.Column(db.String(25)) #工作地点
+    company_introduction = db.Column.String(300)) #企业详细介绍
     def __repr__(self):
         return '<Company:{}>'.format(self.name)
 
