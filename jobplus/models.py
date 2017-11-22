@@ -12,7 +12,7 @@ class Base(db.Model):
     __abstract__ = True
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    create_by = db.Column(db.Integer, default=1)  # 逻辑删除:非0表示显示，0表示删除
+    deleted = db.Column(db.Integer)  # 逻辑删除:0表示显示，1表示删除
 
 
 user_job = db.Table(
