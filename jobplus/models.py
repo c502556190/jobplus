@@ -12,23 +12,31 @@ class Base(db.Model):
     __abstract__ = True
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    create_by = db.Column(db.Integer, default=1)  # 逻辑删除:1表示显示，0表示删除
+    create_by = db.Column(db.Integer, default=1)  # 逻辑删除:非0表示显示，0表示删除
 
 
-class Admin(Base):
-    __tablename__ = 'job_admin'
+user_job = db.Table(
+    'user_job',
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id', ondelete='CASCADE')),
+    db.Column('job_id', db.Integer, db.ForeignKey('jobs.id', ondelete='CASCADE'))
+)
+
+
+class User(Base, UserMixin):
+    """
+    用户表
+    """
+    __tablename__ = 'user'
 
     ROLE_USER = 10
-    ROLE_COMPANY = 20
+    ROLE_STAFF = 20
     ROLE_ADMIN = 30
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(40), unique=True)
     email = db.Column(db.String(40), unique=True)
     _password = db.Column('password', db.String(256), nullable=False)
-    role = db.Column(db.Integer, default=ROLE_USER)
-    last_login_ip = db.Column(db.String(15))
-    groups_id = db.Column(db.Integer, db.ForeignKey('job_admin_group.id'))
+    role = db.Column(db.SmallInteger, default=ROLE_USER)
 
     def __repr__(self):
         return '<Admin:{}>'.format(self.username)
@@ -44,56 +52,120 @@ class Admin(Base):
     def check_password(self, password):
         return check_password_hash(self._password, password)
 
+    @property
+    def is_admin(self):
+        return self.role == self.ROLE_ADMIN
 
-class Role(Base):
-    __tablename__ = 'job_role'
+    @property
+    def is_staf(self):
+        return self.role == self.ROLE_STAFF
+
+
+class Resume(Base):
+    """
+    用户简历表
+    """
+    __tabalename__ = 'resume'
+
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), unique=True, index=True, nullable=False)
-    link = db.Column(db.String(50), unique=True)
-    method = db.Column(db.String(50))
-    groups_id = db.Column(db.Integer, db.ForeignKey('job_admin_group.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship('User', uselist=False)
+    job_experiences = db.relationship('JobExperience')
+    edu_experiences = db.relationship('EduExperience')
+    project_experiences = db.relationship('ProExperience')
 
-    def __repr__(self):
-        return '<Role:{}>'.format(self.name)
+    def profile(self):
+        pass
 
 
-class AGroup(Base):
-    __tablename__ = 'job_admin_group'
+class Experience(Base):
+    __abstract__ = True
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(30), unique=True, index=True, nullable=False)
+    begin_at = db.Column(db.DateTime)
+    end_at = db.Column(db.DateTime)
+    # 在职期间，做了什么，解决了什么问题，做出了什么贡献
+    # 在校期间做过什么，取得过什么荣誉
+    # 项目期间，做了什么，解决了什么问题，做出了什么贡献
+    description = db.Column(db.String(1024))
 
-    def __repr__(self):
-        return '<Agroup:{}>'.format(self.name)
+
+class EduExperience(Experience):
+    __tablename__ = 'edu_experience'
+
+    school = db.Column(db.String(32), nullable=False)
+    # 所学专业
+    specialty = db.Column(db.String(32), nullable=False)
+    degree = db.Column(db.String(16))
+    resume_id = db.Column(db.Integer, db.ForeignKey('resume.id'))
+    resume = db.relationship('Resume', uselist=False)
 
 
 class Jobs(Base):
-    __tablename__ = 'job_jobs'
+    __tablename__ = 'jobs'
+
     id = db.Column(db.Integer, primary_key=True)
-    jobs_name = db.Column(db.String(50), unique=True, index=True, nullable=False)
-    company_id = db.Column(db.Integer,ForeignKey=('job_company.id'))  # 企业id
-    company = relationship('job_company')
-    company_addtime = db.Column(db.Integer)  # 企业添加时间
-    company_audit = db.Column(db.Integer)
-    sex = db.Column(db.String(3))  # 性别
-    age = db.Column(db.String(10))  # 年龄
-    education = db.Column(db.String(30))  # 教育程度
-    experience = db.Column(db.String(30))  # 工作经验
-    salary = db.Column(db.Integer)  #薪资
-    recruit_amount = db.Column(db.Integer) # 招聘数量
+    # 职位名称
+    name = db.Column(db.String(24))
+    salary_low = db.Column(db.Integer, nullable=False)
+    salary_high = db.Column(db.Integer, nullable=False)
+    location = db.Column(db.String(24))
+    # 职位标签，多个标签用逗号隔开，最多10个
+    tags = db.Column(db.String(128))
+    experience_requirement = db.Column(db.String(32))
+    degree_requirement = db.Column(db.String(32))
+    is_fulltime = db.Column(db.Boolean, default=True)
+    # 是否在招聘
+    is_open = db.Column(db.Boolean, default=True)
+    company_id = db.Column(db.Integer, db.ForeignKey('company.id', ondelete='CASCADE'))
+    company = db.relationship('Company', uselist=False)
+    views_count = db.Column(db.Integer, default=0)
+
     def __repr__(self):
-        return '<Jobs:{}>'.format(self.jobs_name)
+        return '<Job {}>'.format(self.name)
 
 
 class Company(Base):
-    __tablename__ = 'job_company'
+    __tablename__ = 'company'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), unique=True, index=True, nullable=False)
-    company_info = db.Column(db.String(100))  #一句话 企业简介
-    company_website = db.Column(db.string(100))# 企业网址
-    work_place = db.Column(db.String(25)) #工作地点
-    company_introduction = db.Column.String(300)) #企业详细介绍
-    def __repr__(self):
-        return '<Company:{}>'.format(self.name)
+    name = db.Column(db.String(64), nullable=False, index=True, unique=True)
+    slug = db.Column(db.String(24), nullable=False, index=True, unique=True)
+    logo = db.Column(db.String(64), nullable=False)
+    site = db.Column(db.String(64), nullable=False)
+    contact = db.Column(db.String(24), nullable=False)
+    email = db.Column(db.String(24), nullable=False)
+    location = db.Column(db.String(24), nullable=False)
+    # 一句话描述
+    description = db.Column(db.String(100))
+    # 关于我们，公司详情描述
+    about = db.Column(db.String(1024))
+    # 公司标签，多个标签用逗号隔开，最多10个
+    tags = db.Column(db.String(128))
+    # 公司技术栈，多个技术用逗号隔开，最多10个
+    stack = db.Column(db.String(128))
+    # 团队介绍
+    team_introduction = db.Column(db.String(256))
+    # 公司福利，多个福利用分号隔开，最多 10 个
+    welfares = db.Column(db.String(256))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='SET NULL'))
+    user = db.relationship('User', uselist=False, backref=db.backref('company', uselist=False))
+
+
+class Dilivery(Base):
+    __tablename__ = 'delivery'
+
+    # 等待企业审核
+    STATUS_WAITING = 1
+    # 被拒绝
+    STATUS_REJECT = 2
+    # 被接收，等待通知面试
+    STATUS_ACCEPT = 3
+
+    id = db.Column(db.Integer, primary_key=True)
+    job_id = db.Column(db.Integer, db.ForeignKey('jobs.id', ondelete='SET NULL'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='SET NULL'))
+    status = db.Column(db.SmallInteger, default=STATUS_WAITING)
+    # 企业回应
+    response = db.Column(db.String(256))
 
