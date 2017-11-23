@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import (StringField, PasswordField, SubmitField, SelectField, Field)
-from wtforms.validators import (Length, Email, DataRequired, Required)
+from wtforms import (StringField, PasswordField, SubmitField, SelectField, FileField)
+from wtforms.validators import (Length, Email, DataRequired)
 from jobplus.models import db, User
 
 
@@ -12,8 +12,6 @@ class UserProfileForm(FlaskForm):
             Length(3, 24)
         ],
         render_kw={
-            "class": "form-control",
-            "id": "exampleInputEmail1",
             "placeholder": "请输入片名！",
         }
     )
@@ -25,7 +23,7 @@ class UserProfileForm(FlaskForm):
             Length(6, 24)
         ],
         render_kw={
-            'class': 'form-control'
+            "placeholder": "请输入密码！",
         }
     )
 
@@ -37,7 +35,7 @@ class UserProfileForm(FlaskForm):
             Email()
         ],
         render_kw={
-            'class': 'form-control'
+            "placeholder": "请输入邮箱！",
         }
     )
 
@@ -54,20 +52,14 @@ class UserProfileForm(FlaskForm):
             (4, "4年"),
             (5, "5年"),
 
-        ],
-        render_kw={
-            'class': 'form-control'
-        }
+        ]
     )
 
-    resume = Field(
+    resume = FileField(
         label='简历',
         validators=[
             DataRequired("请上传简历")
-        ],
-        render_kw={
-            'class': 'form-control'
-        }
+        ]
     )
 
     submit = SubmitField(
