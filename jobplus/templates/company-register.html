@@ -1,13 +1,9 @@
 {% extends "base.html" %}
-{% from "macros.html" import render_form %}
 
-{% block title %}
-CompanyRegister
-{% endblock %}
+{% from "macros.html" import render_forms %}
+
+{% block title %}企业注册{% endblock %}
 
 {% block body %}
-<div clss="form">
-    <h2>ע��</h2>
-    {{ render_form(form,url_for('front.company-register')) }}
-</div>
-
+    {{ render_forms(form,'front.company-register') }}
+{% endblock %}
