@@ -6,6 +6,13 @@
     {% block css %}
         <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css') }}">
     {% endblock %}
+    <meta charset="UTF-8"># 设定编码author:小学生
+    <title>LOUPLUS - Team 5 JOBPLUS</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="static/main.css">#author:little student
+
+    {% block css %}{% endblock %}
 </head>
 <body>
 <nav class="navbar navbar-default">
@@ -31,8 +38,8 @@
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="{{ url_for('user.index') }}">注册</a></li>
-                <li><a href="{{ url_for('user.index') }}">登录</a></li>
+                <li><a href="{{ url_for('user.register') }}">注册</a></li>
+                <li><a href="{{ url_for('user.login') }}">登录</a></li>
 
             </ul>
         </div><!-- /.navbar-collapse -->
