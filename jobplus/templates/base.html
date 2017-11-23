@@ -5,14 +5,8 @@
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
     {% block css %}
         <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static',filename='static/main.css') }}">
     {% endblock %}
-    <meta charset="UTF-8"># 设定编码author:小学生
-    <title>LOUPLUS - Team 5 JOBPLUS</title>
-    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
-    <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="static/main.css">#author:little student
-
-    {% block css %}{% endblock %}
 </head>
 <body>
 <nav class="navbar navbar-default">
