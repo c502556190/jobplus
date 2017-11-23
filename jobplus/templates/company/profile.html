@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% from "macros.html" import render_forms %}
+
+{% block title %}企业配置页{% endblock %}
+
+{% block body %}
+    {{ render_forms(form,url_for('company.profile')) }}
+{% endblock %}
