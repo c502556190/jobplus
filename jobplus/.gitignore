@@ -1,5 +1,5 @@
 #my config
 *.py[cod]
-__pycache__
-.gitignore
-.idea
+*__pycache__
+*.gitignore
+*.idea
