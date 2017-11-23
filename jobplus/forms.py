@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import (StringField, PasswordField, SubmitField, SelectField, FileField, TextAreaField)
-from wtforms.validators import (Length, Email, DataRequired)
+from wtforms import (StringField, PasswordField, SubmitField, SelectField, FileField, TextAreaField, BooleanField,
+                     ValidationError)
+from wtforms.validators import (Length, Email, DataRequired, URL, EqualTo)
 from jobplus.models import db, User
 
 
@@ -116,7 +117,8 @@ class CompanyProfileForm(FlaskForm):
     url = StringField(
         label='网站链接',
         validators=[
-            DataRequired("网站链接不能为空!")
+            DataRequired("网站链接不能为空!"),
+            URL()
         ]
     )
 
@@ -138,3 +140,50 @@ class CompanyProfileForm(FlaskForm):
 
     submit = SubmitField(label='提交')
 
+
+class LoginForm(FlaskForm):
+    """
+    登录表单
+    Author: 小学生
+    """
+    email = StringField('邮箱', validators=[DataRequired("邮箱不能为空"), Email()])
+    password = PasswordField('密码', validators=[DataRequired("密码不能为空"), Length(6, 24)])
+    remember_me = BooleanField('记住我')
+    submit = SubmitField('提交')
+
+    def validate_email(self, field):
+        if field.data and not User.query.filter_by(email=field.data).first():
+            raise ValidationError('该邮箱未注册')
+
+    def validate_password(self, field):
+        user = User.query.filter_by(email=self.email.data).first()
+        if user and not user.check_password(field.data):
+            raise ValidationError('密码错误')
+
+
+class RegisterForm(FlaskForm):
+    """
+    注册表单
+    Author: 小学生
+    """
+    username = StringField('用户名', validators=[DataRequired("用户名不能为空!"), Length(3, 24)])
+    email = StringField('邮箱', validators=[DataRequired("邮箱不能为空"), Email()])
+    password = PasswordField('密码', validators=[DataRequired("密码不能为空"), Length(6, 24)])
+    repeat_password = PasswordField('重复密码', validators=[DataRequired("重复密码不能为空"), EqualTo('password')])
+    submit = SubmitField('提交')
+
+    def validate_username(self, field):
+        if User.query.filter_by(username=field.data).first():
+            raise ValidationError('用户名已经存在')
+
+    def validate_email(self, field):
+        if User.query.filter_by(email=field.data).first():
+            raise ValidationError('邮箱已经存在')
+
+    def create_user(self):
+        user = User(username=self.username.data,
+                    email=self.email.data,
+                    password=self.password.data)
+        db.session.add(user)
+        db.session.commit()
+        return user
