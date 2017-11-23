@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>LOUPLUS - Team 5 JOBPLUS</title>
+    <title>{% block title %}{% endblock %}</title>
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
-    <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css') }}">
-
-
-    {% block css %}{% endblock %}
+    {% block css %}
+        <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css') }}">
+    {% endblock %}
 </head>
 <body>
 <nav class="navbar navbar-default">
@@ -28,6 +27,8 @@
                 <li class="active"><a href="/">Index <span class="sr-only">(current)</span></a></li>
                 <li><a href="{{ url_for('job.index') }}">Jobs</a></li>
                 <li><a href="{{ url_for('company.index') }}">Company</a></li>
+                <li><a href="{{ url_for('user.profile') }}">Company</a></li>
+
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="{{ url_for('user.index') }}">注册</a></li>
@@ -42,6 +43,7 @@
 {% block body %}
 {% endblock %}
 
+{% block footer %}{% endblock %}
 {% block js %}
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="{{ url_for('static',filename='js/jquery.min.js') }}"></script>

@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 {% from "macros.html" import render_form %}
+{% block title %}HAHA{% endblock %}
 {% block body %}
-    <div class="form">
-        {{ render_form(form,url_for('user.profile')) }}
+    <h2>用户配置</h2>
+    <div class="row">
+        <div class="col-xs-6 col-md-3"></div>
+        <div class="col-xs-12 col-md-6">{{ render_form(form,url_for('user.profile')) }}</div>
+        <div class="col-xs-6 col-md-3"></div>
     </div>
 {% endblock %}

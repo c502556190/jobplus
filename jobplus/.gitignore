@@ -1,4 +1,4 @@
 #my config
 *.py[cod]
 __pycache__
-.*
+.gitignore
