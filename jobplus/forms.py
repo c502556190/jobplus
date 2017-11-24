@@ -227,3 +227,7 @@ class UserForm(FlaskForm):
     )
 
     submit = SubmitField('添加')
+
+    def validate_email(self, field):
+        if User.query.filter_by(email=field.data).first():
+            raise ValidationError('用户名已经存在')

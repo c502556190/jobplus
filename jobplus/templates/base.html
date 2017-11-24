@@ -40,22 +40,17 @@
 </nav>
 </body>
 <div class="container">
-    {% for msg in get_flashed_messages(category_filter=["ok"]) %}
-        <div class="alert alert-success alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×
-            </button>
-            <h4><i class="icon fa fa-check"></i>成功!</h4>
-            {{ msg }}
-        </div>
-    {% endfor %}
-    {% for msg in get_flashed_messages(category_filter=["err"]) %}
-        <div class="alert alert-danger alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×
-            </button>
-            <h4><i class="icon fa fa-ban"></i>失败!</h4>
-            {{ msg }}
-        </div>
-    {% endfor %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
     {% block body %}{% endblock %}
 </div>
 {% block footer %}{% endblock %}

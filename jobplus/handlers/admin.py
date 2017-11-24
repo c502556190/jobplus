@@ -1,4 +1,4 @@
-from flask import (Blueprint, render_template, redirect, flash)
+from flask import (Blueprint, render_template, redirect, flash, url_for)
 from jobplus.models import (db, User)
 from jobplus.forms import (UserForm)
 from werkzeug.security import (generate_password_hash)
@@ -30,5 +30,6 @@ def user_add():
         )
         db.session.add(user)
         db.session.commit()
-        flash("用户新增成功", 'ok')
+        flash("用户新增成功", 'success')
+        return redirect(url_for('admin.index'))
     return render_template("admin/user-add.html", form=form)
