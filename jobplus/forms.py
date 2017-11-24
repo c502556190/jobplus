@@ -187,3 +187,43 @@ class RegisterForm(FlaskForm):
         db.session.add(user)
         db.session.commit()
         return user
+
+
+class UserForm(FlaskForm):
+    """
+    新增用户表单
+    Author: little、seven
+    """
+    email = StringField(
+        label='邮箱',
+        validators=[
+            DataRequired("邮箱不能为空!"),
+            Length(1, 64, message="邮箱请输入1~64位长度!"),
+            Email()
+        ]
+    )
+
+    password = PasswordField(
+        label='密码',
+        validators=[
+            DataRequired("密码不能为空!"),
+            Length(6, 32, message="密码请输入6~32位的长度")
+        ]
+    )
+
+    username = StringField(
+        label='姓名',
+        validators=[
+            DataRequired("请输入姓名!"),
+        ]
+    )
+
+    phone = StringField(
+        label='手机',
+        validators=[
+            DataRequired("手机号不能为空!"),
+            Length(11, message="请输入长度为11位的手机号")
+        ]
+    )
+
+    submit = SubmitField('添加')

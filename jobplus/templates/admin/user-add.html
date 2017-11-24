@@ -1,0 +1,18 @@
+{% extends "admin/admin_base.html" %}
+
+{% from "macros.html" import render_forms %}
+
+{% block title %}新增用户{% endblock %}
+
+{% block operation %}
+    <h2>
+        新增用户
+        <a class="btn btn-primary" href="{{ url_for('admin.index') }}" style="margin-left: 70%" role="button"><span
+                class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> 返回</a>
+
+    </h2>
+{% endblock %}
+
+{% block user %}
+    {{ render_forms(form,url_for('admin.user_add')) }}
+{% endblock %}

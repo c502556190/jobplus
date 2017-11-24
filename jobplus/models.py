@@ -35,6 +35,7 @@ class User(Base, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(40), unique=True)
     email = db.Column(db.String(40), unique=True)
+    phone = db.Column(db.Integer)
     _password = db.Column('password', db.String(256), nullable=False)
     role = db.Column(db.SmallInteger, default=ROLE_USER)
 
@@ -72,7 +73,7 @@ class Resume(Base):
     user = db.relationship('User', uselist=False)
     job_experiences = db.relationship('JobExperience')
     edu_experiences = db.relationship('EduExperience')
-    project_experiences = db.relationship('ProExperience')
+    project_experiences = db.relationship('ProjectExperice')
 
     def profile(self):
         pass
@@ -88,6 +89,27 @@ class Experience(Base):
     # 在校期间做过什么，取得过什么荣誉
     # 项目期间，做了什么，解决了什么问题，做出了什么贡献
     description = db.Column(db.String(1024))
+
+
+class JobExperience(Experience):
+    __tablename__ = 'job_experience'
+
+    company = db.Column(db.String(32), nullable=False)
+    city = db.Column(db.String(32), nullable=False)
+    resume_id = db.Column(db.Integer, db.ForeignKey('resume.id'))
+    resume = db.relationship('Resume', uselist=False)
+
+
+class ProjectExperice(Experience):
+    __tablename__ = 'project_experience'
+
+    name = db.Column(db.String(32), nullable=False)
+    # 在项目中扮演的角色
+    role = db.Column(db.String(32))
+    # 多个技术用逗号隔开
+    technologys = db.Column(db.String(64))
+    resume_id = db.Column(db.Integer, db.ForeignKey('resume.id'))
+    resume = db.relationship('Resume', uselist=False)
 
 
 class EduExperience(Experience):
@@ -168,4 +190,3 @@ class Dilivery(Base):
     status = db.Column(db.SmallInteger, default=STATUS_WAITING)
     # 企业回应
     response = db.Column(db.String(256))
-
