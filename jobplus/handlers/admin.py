@@ -5,4 +5,4 @@ admin = Blueprint('admin', __name__, url_prefix='/admin')
 
 @admin.route('/')
 def index():
-    return render_template('admin/admin_base.html')
+    return render_template('admin/user_config.html')
