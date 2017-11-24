@@ -40,10 +40,26 @@
     </div><!-- /.container-fluid -->
 </nav>
 </body>
-
-{% block body %}
-{% endblock %}
-
+<div class="container">
+    {% for msg in get_flashed_messages(category_filter=["ok"]) %}
+        <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×
+            </button>
+            <h4><i class="icon fa fa-check"></i>成功!</h4>
+            {{ msg }}
+        </div>
+    {% endfor %}
+    {% for msg in get_flashed_messages(category_filter=["err"]) %}
+        <div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×
+            </button>
+            <h4><i class="icon fa fa-ban"></i>失败!</h4>
+            {{ msg }}
+        </div>
+    {% endfor %}
+    {% block body %}
+    {% endblock %}
+</div>
 {% block footer %}{% endblock %}
 {% block js %}
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->

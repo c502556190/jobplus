@@ -1,7 +1,7 @@
 {% extends "base.html" %}
-{% from "macros.html" import render_form %}
+{% from "macros.html" import render_forms %}
 {% block body %}
     <div class="form">
-        {{ render_form(form,url_for('user.profile')) }}
+        {{ render_forms(form,url_for('user.profile')) }}
     </div>
 {% endblock %}
