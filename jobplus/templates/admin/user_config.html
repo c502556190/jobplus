@@ -21,7 +21,6 @@
                 <th>手机号</th>
                 <th>企业名称</th>
                 <th>企业网站</th>
-                <th>状态</th>
                 <th>操作</th>
             </tr>
             </thead>
@@ -36,12 +35,10 @@
                     <td>企业名称</td>
                     <td>企业网站</td>
                     <td>
-                        <a class="btn-xs btn-success" href="#" role="button">启用</a>
-
-                    </td>
-                    <td>
-                        <a class="btn-xs btn-info" href="{{ url_for('admin.user_edit',id=data.id) }}" role="button">编辑</a>
-                        <a class="btn-xs btn-danger" href="{{ url_for('admin.user_delete',id=data.id) }}" role="button">删除</a>
+                        <a class="btn-xs btn-info" href="{{ url_for('admin.user_edit',id=data.id) }}"
+                           role="button">编辑</a>
+                        <a class="btn-xs btn-success" href="{{ url_for('admin.user_delete',id=data.id) }}"
+                           role="button">启用</a>
                     </td>
                 </tr>
             {% endfor %}

@@ -1,10 +1,9 @@
-from flask import Blueprint, render_template
-from jobplus.forms import UserProfileForm
-# 引用 author:小学生
-from jobplus.models import User
-from flask_login import login_user, logout_user, login_required
-from flask import redirect, url_for, request, current_app
-from jobplus.forms import LoginForm, RegisterForm
+from flask import (Blueprint, render_template, flash)
+from jobplus.forms import (UserProfileForm)
+from jobplus.models import (User)
+from flask_login import (login_user, logout_user, login_required)
+from flask import (redirect, url_for)
+from jobplus.forms import (LoginForm, RegisterForm)
 
 user = Blueprint('user', __name__, url_prefix='/user')
 
@@ -30,7 +29,7 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         login_user(user, form.remember_me.data)
         return redirect(url_for('.profile'))
-    return render_template('login.html', form=form)
+    return render_template('front/login.html', form=form)
 
 
 @user.route('/register', methods=['GET', 'POST'])
@@ -40,7 +39,7 @@ def register():
         form.create_user()
         flash('register success，login please!', 'success')
         return redirect(url_for('.login'))
-    return render_template('register.html', form=form)
+    return render_template('front/register.html', form=form)
 
 
 @user.route('/logout')
