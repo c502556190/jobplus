@@ -16,10 +16,12 @@ https://www.shiyanlou.com/louplus/python
 **进入到目录:**
 - `export FLASK_APP=manage.py`
 - `export FLASK_DEBUG=1`
+
 **初始化数据库:**
 - `flask db init`
 - `flask db migrate -m "init database"`
 - `flask db upgrade`
+
 **运行项目:**
 - `flask run`
 >-p port
