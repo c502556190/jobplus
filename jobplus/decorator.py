@@ -1,5 +1,5 @@
-from flask import (abort)
-from flask_login import current_user
+from flask import abort
+from flask_login import (current_user)
 from functools import wraps
 from jobplus.models import (db, User)
 
@@ -30,10 +30,10 @@ def role_required(role):
 
     def decorator(func):
         @wraps(func)
-        def wrapper(*args, **kwargs):
+        def wrapper(*args, **kwrargs):
             if not current_user.is_authenticated or current_user.role < role:
                 abort(404)
-            return func(*args, **kwargs)
+            return func(*args, **kwrargs)
 
         return wrapper
 

@@ -3,12 +3,13 @@ from jobplus.models import (db, User)
 from jobplus.forms import (UserForm)
 from werkzeug.security import (generate_password_hash)
 
-from jobplus.decorator import delete
+from jobplus.decorator import (delete, admin_required)
 
 admin = Blueprint('admin', __name__, url_prefix='/admin')
 
 
 @admin.route('/')
+@admin_required
 def index():
     page = request.args.get('page', default=1, type=int)
     pagination = User.query.filter_by(deleted=0).paginate(
@@ -20,6 +21,7 @@ def index():
 
 
 @admin.route('/users/adduser', methods=["GET", "POST"])
+@admin_required
 def user_add():
     """
     添加用户
@@ -44,6 +46,7 @@ def user_add():
 
 
 @admin.route('/users/edituser/<int:id>', methods=["GET", "POST"])
+@admin_required
 def user_edit(id=None):
     """
     编辑用户
@@ -67,6 +70,7 @@ def user_edit(id=None):
 
 
 @admin.route('/users/delteuser/<int:id>', methods=["GET", "POST"])
+@admin_required
 def user_delete(id=None):
     """
     删除用户(逻辑删除)
@@ -81,6 +85,7 @@ def user_delete(id=None):
 
 
 @admin.route('/users/addcompany', methods=["GET", "POST"])
+@admin_required
 def company_add():
     """
     添加企业用户

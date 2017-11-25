@@ -1,7 +1,7 @@
-from flask import (Blueprint, render_template, flash)
+from flask import (Blueprint, render_template, flash, request)
 from jobplus.forms import (UserProfileForm)
-from jobplus.models import (User)
-from flask_login import (login_user, logout_user, login_required)
+from jobplus.models import (db, User)
+from flask_login import (login_user, logout_user, login_required, current_user)
 from flask import (redirect, url_for)
 from jobplus.forms import (LoginForm, RegisterForm)
 
@@ -14,8 +14,9 @@ def index():
 
 
 @user.route('/profile/', methods=["GET", "POST"])
+@login_required
 def profile():
-    form = UserProfileForm()
+    form = UserProfileForm(obj=current_user)
     if form.validate_on_submit():
         pass
     return render_template('user/profile.html', form=form)
