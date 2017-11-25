@@ -18,4 +18,4 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         login_user(user, form.remember_me.data)
         return redirect(url_for('.profile'))
-    return render_template('login.html', form=form)
+    return render_template('front/login.html', form=form)

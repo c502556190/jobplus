@@ -1,5 +1,5 @@
 {% extends "admin/admin_base.html" %}
-
+{% from "macros.html" import render_pagination as pg %}
 {% block operation %}
     <h2>
         用户管理
@@ -26,25 +26,27 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>12312312</td>
-                <td>企业名称</td>
-                <td>企业网站</td>
-                <td>
-                    <a class="btn-xs btn-success" href="#" role="button">启用</a>
+            {% for data in pagination.items %}
+                <tr>
+                    <th scope="row">{{ data.id }}</th>
+                    <td>{{ data.email }}</td>
+                    <td>Otto</td>
+                    <td>{{ data.username }}</td>
+                    <td>{{ data.phone }}</td>
+                    <td>企业名称</td>
+                    <td>企业网站</td>
+                    <td>
+                        <a class="btn-xs btn-success" href="#" role="button">启用</a>
 
-                </td>
-                <td>
-                    <a class="btn-xs btn-info" href="#" role="button">编辑</a>
-                    <a class="btn-xs btn-danger" href="#" role="button">删除</a>
-
-                </td>
-            </tr>
+                    </td>
+                    <td>
+                        <a class="btn-xs btn-info" href="{{ url_for('admin.user_edit',id=data.id) }}" role="button">编辑</a>
+                        <a class="btn-xs btn-danger" href="{{ url_for('admin.user_delete',id=data.id) }}" role="button">删除</a>
+                    </td>
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
     </div>
+    {{ pg(pagination,'admin.index') }}
 {% endblock %}

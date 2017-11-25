@@ -231,3 +231,56 @@ class UserForm(FlaskForm):
     def validate_email(self, field):
         if User.query.filter_by(email=field.data).first():
             raise ValidationError('用户名已经存在')
+
+
+class CompanyForm(FlaskForm):
+    """
+    新增企业用户表单
+    Author: little、seven
+    """
+    email = StringField(
+        label='邮箱',
+        validators=[
+            DataRequired("邮箱不能为空!"),
+            Length(1, 64, message="邮箱请输入1~64位长度!"),
+            Email()
+        ]
+    )
+
+    password = PasswordField(
+        label='密码',
+        validators=[
+            DataRequired("密码不能为空!"),
+            Length(6, 32, message="密码请输入6~32位的长度")
+        ]
+    )
+
+    username = StringField(
+        label='姓名',
+        validators=[
+            DataRequired("请输入姓名!"),
+        ]
+    )
+
+    url = StringField(
+        label='企业网站',
+        validators=[
+            DataRequired("企业网站不能为空!")
+        ]
+    )
+
+    one_introduction = TextAreaField(
+        label='一句话简介',
+        validators=[
+            DataRequired("一句话简介不能为空!"),
+            Length(max=100)
+        ]
+    )
+
+
+
+    submit = SubmitField('添加')
+
+    def validate_email(self, field):
+        if User.query.filter_by(email=field.data).first():
+            raise ValidationError('用户名已经存在')
