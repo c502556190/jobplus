@@ -13,7 +13,7 @@ class Base(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     deleted = db.Column(db.Integer, default=0)  # 逻辑删除:0表示显示，1表示删除
-
+    active = db.Column(db.Integer, default=0)  # 禁用/启用:0表示显示，1表示删除
 
 user_job = db.Table(
     'user_job',
@@ -60,6 +60,13 @@ class User(Base, UserMixin):
     @property
     def is_staf(self):
         return self.role == self.ROLE_STAFF
+
+    @property
+    def is_active(self):
+        if self.active == 0:
+            return "禁用"
+        else:
+            return "启用"
 
 
 class Resume(Base):

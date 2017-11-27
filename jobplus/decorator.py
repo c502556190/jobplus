@@ -21,6 +21,40 @@ def delete(model, id=None):
     return False
 
 
+def ban(model, id=None):
+    """
+    逻辑删除
+    Author: little、seven
+    :param model: Models类
+    :param id: 要删除的id
+    :return:
+    """
+    dd = model.query.get_or_404(int(id))
+    if dd:
+        dd.active = 1
+        db.session.add(dd)
+        db.session.commit()
+        return True
+    return False
+
+
+def unban(model, id=None):
+    """
+    逻辑删除
+    Author: little、seven
+    :param model: Models类
+    :param id: 要删除的id
+    :return:
+    """
+    dd = model.query.get_or_404(int(id))
+    if dd:
+        dd.active = 0
+        db.session.add(dd)
+        db.session.commit()
+        return True
+    return False
+
+
 def role_required(role):
     """
     登录验证控制器

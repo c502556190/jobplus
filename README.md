@@ -7,7 +7,7 @@ https://www.shiyanlou.com/louplus/python
 * [se7en](https://github.com/litt1eseven/jobplus)
 * [michael2016](https://github.com/michaellqu)
 * [LI小学生](https://github.com/Jupiter001)
-
+* [LouPlus](https://github.com/LouPlus)
 ## doc
 **下载对应的库：** 
 - `pip install pymysql  `
