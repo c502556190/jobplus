@@ -1,4 +1,4 @@
-from flask import (Blueprint, render_template, redirect, url_for)
+from flask import (Blueprint, render_template, redirect, url_for, flash)
 from flask_login import (login_user, logout_user, login_required)
 from jobplus.forms import LoginForm
 from jobplus.models import User
@@ -19,3 +19,10 @@ def login():
         login_user(user, form.remember_me.data)
         return redirect(url_for('.profile'))
     return render_template('front/login.html', form=form)
+
+
+@front.route('/logout')
+def logout():
+    logout_user()
+    flash('您已经退出登录', 'success')
+    return redirect(url_for('.index'))
