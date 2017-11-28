@@ -4,25 +4,21 @@ from flask import render_template
 job = Blueprint('job', __name__, url_prefix='/job')
 
 
-@job.route('/')
+@job.route('/', methods=["GET", "POST"])
 def index():
-    return 'Job'
-
-
-@job.route('/list/', methods=["GET", "POST"])
-def JobListView():
     """
     职位列表
+    Author: little、seven
     :return:
     """
-    job = job.query_all()
-    return render_template('/job/joblist.html', job=joblist)
+    return render_template('/job/index.html')
 
 
 @job.route('/detail/<int:id>', methods=["GET", "POST"])
-def JobDetailView(id):
+def job_detail(id):
     """
     职位详情
+    Author: little、seven
     :param id: 职位id
     :return:
     """
