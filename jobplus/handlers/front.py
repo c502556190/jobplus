@@ -37,7 +37,7 @@ def register():
     form = RegisterForm()
     if form.validate_on_submit():
         form.create_user()
-        flash('register success，login please!', 'success')
+        flash('注册成功,请登录!', 'success')
         return redirect(url_for('.login'))
     return render_template('front/register.html', form=form)
 
@@ -46,5 +46,5 @@ def register():
 @login_required
 def logout():
     logout_user()
-    flash('已退出', 'success')
+    flash('退出成功!', 'success')
     return redirect(url_for('.index'))
