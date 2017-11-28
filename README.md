@@ -26,3 +26,9 @@ https://www.shiyanlou.com/louplus/python
 - `flask run`
 >-p port
  -h host
+
+**管理员登录**
+- `username: shiyanlou@admin.com | password: admin123`
+
+**使用管理员登录后访问控制台**
+>访问后将展示用户列表信息
