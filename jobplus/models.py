@@ -29,7 +29,7 @@ class User(Base, UserMixin):
     __tablename__ = 'user'
 
     ROLE_USER = 10
-    ROLE_STAFF = 20
+    ROLE_COMPANY = 20
     ROLE_ADMIN = 30
 
     id = db.Column(db.Integer, primary_key=True)
@@ -58,8 +58,8 @@ class User(Base, UserMixin):
         return self.role == self.ROLE_ADMIN
 
     @property
-    def is_staf(self):
-        return self.role == self.ROLE_STAFF
+    def is_company(self):
+        return self.role == self.ROLE_COMPANY
 
     @property
     def is_active(self):

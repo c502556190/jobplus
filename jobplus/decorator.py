@@ -68,11 +68,9 @@ def role_required(role):
             if not current_user.is_authenticated or current_user.role < role:
                 abort(404)
             return func(*args, **kwrargs)
-
         return wrapper
-
     return decorator
 
 
-company_required = role_required(User.ROLE_STAFF)
+company_required = role_required(User.ROLE_COMPANY)
 admin_required = role_required(User.ROLE_ADMIN)
