@@ -37,7 +37,6 @@ exit() # 退出
  -h host
 
 **管理员登录**
-点击主页注册按钮
 - `username: shiyanlou@admin.com | password: admin123`
 
 **使用管理员登录后访问控制台**
