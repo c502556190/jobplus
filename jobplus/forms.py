@@ -146,10 +146,27 @@ class LoginForm(FlaskForm):
     登录表单
     Author: 小学生
     """
-    email = StringField('邮箱', validators=[DataRequired("邮箱不能为空"), Email()])
-    password = PasswordField('密码', validators=[DataRequired("密码不能为空"), Length(6, 24)])
-    remember_me = BooleanField('记住我')
-    submit = SubmitField('提交')
+
+    email = StringField(
+        label='邮箱',
+        validators=[
+            DataRequired("邮箱不能为空"),
+            Email(),
+            Length(1, 64)
+        ]
+    )
+
+    password = PasswordField(
+        label='密码',
+        validators=[
+            DataRequired("密码不能为空"),
+            Length(6, 24)
+        ]
+    )
+    remember_me = BooleanField(
+        label='记住我'
+    )
+    submit = SubmitField('登录')
 
     def validate_email(self, field):
         if field.data and not User.query.filter_by(email=field.data).first():
@@ -276,8 +293,6 @@ class CompanyForm(FlaskForm):
             Length(max=100)
         ]
     )
-
-
 
     submit = SubmitField('添加')
 
