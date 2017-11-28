@@ -22,6 +22,15 @@ https://www.shiyanlou.com/louplus/python
 - `flask db migrate -m "init database"`
 - `flask db upgrade`
 
+**创建管理员**
+```
+from flask.models import db,User
+user = User(email='shiyanlou@admin.com',username='admin',password='admin123')
+db.session.add(user)
+db.session.commit()
+exit() # 退出
+```
+
 **运行项目:**
 - `flask run`
 >-p port

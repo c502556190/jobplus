@@ -1,7 +1,7 @@
 from flask import (Blueprint, render_template, flash, request)
 from jobplus.forms import (UserProfileForm)
 from jobplus.models import (db, User)
-from flask_login import (login_user, logout_user, login_required, current_user)
+from flask_login import (login_user, logout_user, login_required)
 from flask import (redirect, url_for)
 from jobplus.forms import (LoginForm, RegisterForm)
 

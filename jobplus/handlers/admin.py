@@ -31,7 +31,7 @@ def user_add():
         data = form.data
         user = User(
             email=data["email"],
-            password=generate_password_hash(data["password"]),
+            password=data["password"],
             username=data["username"],
             phone=data["phone"],
             deleted=0
