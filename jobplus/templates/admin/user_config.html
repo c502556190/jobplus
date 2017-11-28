@@ -37,7 +37,7 @@
                     <td>
                         <a class="btn-xs btn-info" href="{{ url_for('admin.user_edit',id=data.id) }}"
                            role="button">编辑</a>
-                        {% if data.active == 0 %}
+                        {% if data.active == 0 and current_user.is_admin %}
                         <a class="btn-xs btn-danger" href="{{ url_for('admin.user_ban',id=data.id) }}"
                            role="button">{{ data.is_active }}</a>
                         {% else %}
