@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% from "macros.html" import render_pagination %}
 
 {% block title %}
     职位列表
@@ -7,23 +8,23 @@
 {% block body %}
     <div class="job-list">
         <h2 class="h4 mt40 job-list-title">最新职位</h2>
-        {% for i in range(6) %}
+        {% for joblist in pagination.items %}
             <div class="col-xs-6 col-md-1"></div>
             <div class="row col-xs-12 col-md-3">
                 <div class="panel panel-info">
                     <div class="panel-heading">
                         <h3 class="panel-title">
-                            高级前端工程师(Tech Lead)
+                            {{ joblist.name }}
                         </h3>
                     </div>
                     <div class="panel-body">
                         <!--插入内容-->
                         <div class="text-muted job-require">
-                            <strong class="text-green">15k-20k</strong>
-                            <span class="text-muted job-list-item-block-experience">经验3－5年</span>
+                            <strong class="text-green">{{ joblist.salary_low }}-{{ joblist.salary_high }}</strong>
+                            <span class="text-muted job-list-item-block-experience">{{ joblist.experience_requested }}</span>
                             <p class="text-muted job-list-item-block-company-info">
-                                <a href="#">惠普云大></a>
-                                <span class="text-muted job-list-item-block-updatetime">.26分钟前</p>
+                            <a href="#">{{ joblist.company.name }}</a>
+                            <span class="text-muted job-list-item-block-updatetime">{{ joblist.updated_at }}</p>
                             </p>
                         </div>
                         <!--插入内容-->
@@ -33,4 +34,6 @@
         {% endfor %}
         <div class="row col-xs-12 col-md-3">
         </div>
+
+{{ render_pagination(pagination,'job.index') }}
 {% endblock %}

@@ -200,7 +200,9 @@ class CompanyRegisterForm(FlaskForm):
     def create_company(self):
         company = User(username=self.username.data,
                     email=self.email.data,
-                    password=self.password.data)
+                    password=self.password.data,
+                    role = 20
+                    )
         db.session.add(company)
         db.session.commit()
         return company
@@ -223,7 +225,9 @@ class UserRegisterForm(FlaskForm):
     def create_user(self):
         user = User(username=self.username.data,
                 email=self.email.data,
-                password=self.password.data)
+                password=self.password.data,
+                role = 10
+                )
         db.session.add(user)
         db.session.commit()
         return user
