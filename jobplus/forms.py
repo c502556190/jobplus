@@ -178,7 +178,7 @@ class LoginForm(FlaskForm):
             raise ValidationError('密码错误')
 
 
-class RegisterForm(FlaskForm):
+class CompanyRegisterForm(FlaskForm):
     """
     注册表单
     Author: 小学生
@@ -197,14 +197,36 @@ class RegisterForm(FlaskForm):
         if User.query.filter_by(email=field.data).first():
             raise ValidationError('邮箱已经存在')
 
-    def create_user(self):
-        user = User(username=self.username.data,
+    def create_company(self):
+        company = User(username=self.username.data,
                     email=self.email.data,
                     password=self.password.data)
+        db.session.add(company)
+        db.session.commit()
+        return company
+
+class UserRegisterForm(FlaskForm):
+    """
+    author:little student
+
+    increate forms
+    """
+    username = StringField('用户名', validators=[DataRequired("用户名不能为空!"), Length(3, 24)])
+    email = StringField('邮箱', validators=[DataRequired("邮箱不能为空"), Email()])
+    password = PasswordField('密码', validators=[DataRequired("密码不能为空"), Length(6, 24)])
+    submit = SubmitField('提交')
+
+    def validate_email(self, field):
+        if User.query.filter_by(email=field.data).first():
+            raise ValidationError('邮箱已经存在')
+
+    def create_user(self):
+        user = User(username=self.username.data,
+                email=self.email.data,
+                password=self.password.data)
         db.session.add(user)
         db.session.commit()
         return user
-
 
 class UserForm(FlaskForm):
     """
