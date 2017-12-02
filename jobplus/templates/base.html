@@ -24,18 +24,18 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/">Index <span class="sr-only">(current)</span></a></li>
-                <li><a href="{{ url_for('job.index') }}">Jobs</a></li>
-                <li><a href="{{ url_for('company.index') }}">Company</a></li>
+                <li class="active"><a href="/">首页 <span class="sr-only">(current)</span></a></li>
+                <li><a href="{{ url_for('job.index') }}">职位</a></li>
+                <li><a href="{{ url_for('company.index') }}">企业</a></li>
                 {% if current_user.is_authenticated and current_user.is_admin %}
                     <li><a href="{{ url_for('admin.index') }}">控制台</a></li>
                 {% endif %}
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if not current_user.is_authenticated %}
-                    <li><a href="{{ url_for('front.companyregister') }}">Company注册</a></li>
+                    <li><a href="{{ url_for('front.companyregister') }}">企业注册</a></li>
                    
-                    <li><a href="{{ url_for('front.userregister') }}">User注册</a></li>
+                    <li><a href="{{ url_for('front.userregister') }}">用户注册</a></li>
                     <li><a href="{{ url_for('front.login') }}">登录</a></li>
 
                 {% else %}

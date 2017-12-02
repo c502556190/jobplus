@@ -43,6 +43,8 @@ exit() # 退出
 >访问后将展示用户列表信息
 
 **演示**
+- 首页
+![首页](https://github.com/litt1eseven/python-project/blob/master/Company%20project/images/QQ20171202-190822-index-joblist.png)
 
 - 职位列表
 
