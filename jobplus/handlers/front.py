@@ -3,7 +3,7 @@ from jobplus.forms import (UserProfileForm)
 from jobplus.models import (db, User)
 from flask_login import (login_user, logout_user, login_required)
 from flask import (redirect, url_for)
-from jobplus.forms import (LoginForm, RegisterForm)
+from jobplus.forms import (LoginForm, CompanyRegisterForm,UserRegisterForm)
 
 front = Blueprint('front', __name__, url_prefix='/')
 
@@ -32,15 +32,23 @@ def login():
     return render_template('front/login.html', form=form)
 
 
-@front.route('register/', methods=['GET', 'POST'])
-def register():
-    form = RegisterForm()
+@front.route('companyregister/', methods=['GET', 'POST'])
+def companyregister():
+    form = CompanyRegisterForm()
+    if form.validate_on_submit():
+        form.create_company()
+        flash('注册成功,请登录!', 'success')
+        return redirect(url_for('.login'))
+    return render_template('front/company_register.html', form=form)
+
+@front.route('userregister/',methods=['GET','POST'])
+def userregister():
+    form = UserRegisterForm()
     if form.validate_on_submit():
         form.create_user()
         flash('注册成功,请登录!', 'success')
         return redirect(url_for('.login'))
-    return render_template('front/register.html', form=form)
-
+    return render_template('front/user_register.html',form=form)
 
 @front.route('logout/')
 @login_required

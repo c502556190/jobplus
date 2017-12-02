@@ -33,8 +33,11 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if not current_user.is_authenticated %}
-                    <li><a href="{{ url_for('front.register') }}">注册</a></li>
+                    <li><a href="{{ url_for('front.companyregister') }}">Company注册</a></li>
+                   
+                    <li><a href="{{ url_for('front.userregister') }}">User注册</a></li>
                     <li><a href="{{ url_for('front.login') }}">登录</a></li>
+
                 {% else %}
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
