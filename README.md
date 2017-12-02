@@ -46,7 +46,7 @@ exit() # 退出
 
 - 职位列表
 
-![职位列表](https://soo9s.me/2017-12-02-093147.png)
+![职位列表](https://github.com/litt1eseven/python-project/blob/master/Company%20project/images/2017-12-02-093147-jobslist.png)
 
 - 企业列表
 
