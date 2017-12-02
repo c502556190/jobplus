@@ -22,11 +22,14 @@ def index():
 
 
 @job.route('/detail/<int:id>', methods=["GET", "POST"])
-def job_detail(id):
+def job_detail(id=None):
     """
     职位详情
     Author: little、seven
     :param id: 职位id
     :return:
     """
-    return 'JobDetail:{}'.format(id)
+    if id != None:
+        job = Jobs.query.get_or_404(int(id))
+        return render_template("job/job_detail.html", job=job)
+    return 404

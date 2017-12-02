@@ -16,25 +16,18 @@ def index():
     return render_template('company/index.html', company=pagination)
 
 
-@company.route('/list/', methods=["GET", "POST"])
-def companyListView():
-    """
-    企业列表页
-    Author: little、seven
-    :return:
-    """
-    return 'CompanyList'
-
-
 @company.route('/detail/<int:id>', methods=["GET", "POST"])
-def companyDetailView(id):
+def company_detail(id=None):
     """
     企业详情页
     Author: little、seven
     :param id: 企业id
     :return:
     """
-    return 'CompanyDetailView{}'.format(id)
+    if id != None:
+        company = Company.query.get_or_404(int(id))
+        return render_template("company/company_detail.html", company=company)
+    return 404
 
 
 @company.route('/Position/', methods=["GET", "POST"])

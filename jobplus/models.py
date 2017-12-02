@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from  flask import url_for
+from flask import url_for
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
@@ -14,6 +14,7 @@ class Base(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     deleted = db.Column(db.Integer, default=0)  # 逻辑删除:0表示显示，1表示删除
     active = db.Column(db.Integer, default=0)  # 禁用/启用:0表示显示，1表示删除
+
 
 user_job = db.Table(
     'user_job',
@@ -67,6 +68,13 @@ class User(Base, UserMixin):
             return "禁用"
         else:
             return "启用"
+
+    @property
+    def check_exist(self):
+        if self.deleted == 0:
+            return True
+        else:
+            return False
 
 
 class Resume(Base):
