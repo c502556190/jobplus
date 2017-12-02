@@ -1,12 +1,19 @@
-from flask import Blueprint, render_template
+from flask import (Blueprint, render_template, current_app, request)
 from jobplus.forms import (CompanyProfileForm)
+from jobplus.models import (db, Company)
 
 company = Blueprint('company', __name__, url_prefix='/company')
 
 
 @company.route('/')
 def index():
-    return render_template('company/index.html')
+    page = request.args.get('page', default=1, type=int)
+    pagination = Company.query.filter_by(deleted=0).paginate(
+        page=page,
+        per_page=current_app.config["ADMIN_PER_PAGE"],
+        error_out=False
+    )
+    return render_template('company/index.html', company=pagination)
 
 
 @company.route('/list/', methods=["GET", "POST"])
@@ -61,4 +68,3 @@ def profile():
     if form.validate_on_submit():
         pass
     return render_template('company/profile.html', form=form)
-
