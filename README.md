@@ -50,4 +50,4 @@ exit() # 退出
 
 - 企业列表
 
-![企业列表](https://soo9s.me/2017-12-02-093359.png)
+![企业列表](https://github.com/litt1eseven/python-project/blob/master/Company%20project/images/2017-12-02-093359-companylist.png)
