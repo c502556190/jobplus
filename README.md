@@ -44,6 +44,9 @@ exit() # 退出
 
 **演示**
 - 首页
+
+![首页1](https://github.com/litt1eseven/python-project/blob/master/Company%20project/images/QQ20171202-191258-index-1.png)
+
 ![首页](https://github.com/litt1eseven/python-project/blob/master/Company%20project/images/QQ20171202-190822-index-joblist.png)
 
 - 职位列表
