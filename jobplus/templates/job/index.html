@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+
 {% from "macros.html" import render_pagination %}
 
 {% block title %}
@@ -7,33 +8,26 @@
 
 {% block body %}
     <div class="job-list">
-        <h2 class="h4 mt40 job-list-title">最新职位</h2>
-        {% for joblist in pagination.items %}
-            <div class="col-xs-6 col-md-1"></div>
-            <div class="row col-xs-12 col-md-3">
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            {{ joblist.name }}
-                        </h3>
-                    </div>
-                    <div class="panel-body">
-                        <!--插入内容-->
-                        <div class="text-muted job-require">
-                            <strong class="text-green">{{ joblist.salary_low }}-{{ joblist.salary_high }}</strong>
-                            <span class="text-muted job-list-item-block-experience">{{ joblist.experience_requested }}</span>
-                            <p class="text-muted job-list-item-block-company-info">
-                            <a href="#">{{ joblist.company.name }}</a>
-                            <span class="text-muted job-list-item-block-updatetime">{{ joblist.updated_at }}</p>
+        <h2 class="h4 mt40 job-list-title">热门职位</h2>
+        <div class="row">
+            {% for joblist  in pagination.items %}
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                        <img src="https://soo9s.me/blogShow.jpg" alt="职位图标">
+                        <div class="caption">
+                            <h3>{{ joblist.name }}</h3>
+                            <p>{{ joblist.description }}</p>
+                            <p>
+                                <a href="{{ url_for('job.job_detail',id=joblist.id) }}"
+                                   class="btn btn-primary" role="button">查看职位详情</a>
                             </p>
                         </div>
-                        <!--插入内容-->
                     </div>
                 </div>
-            </div>
-        {% endfor %}
-        <div class="row col-xs-12 col-md-3">
+            {% endfor %}
         </div>
-
-{{ render_pagination(pagination,'job.index') }}
+    </div>
+    <div class="row col-xs-12 col-md-3">
+    </div>
+    {{ render_pagination(pagination,'job.index') }}
 {% endblock %}

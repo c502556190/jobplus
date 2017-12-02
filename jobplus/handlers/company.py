@@ -13,7 +13,7 @@ def index():
         per_page=current_app.config["ADMIN_PER_PAGE"],
         error_out=False
     )
-    return render_template('company/index.html', company=pagination)
+    return render_template('company/index.html', pagination=pagination)
 
 
 @company.route('/detail/<int:id>', methods=["GET", "POST"])

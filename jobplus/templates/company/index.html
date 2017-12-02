@@ -8,33 +8,26 @@
 {% block body %}
     <div class="job-list">
         <h2 class="h4 mt40 job-list-title">热门企业</h2>
-        {% for companylist  in company.items %}
-            <div class="col-xs-6 col-md-1"></div>
-            <div class="row col-xs-12 col-md-3">
-                <div class="panel panel-success">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            {{ companylist.name }}
-                        </h3>
-                    </div>
-                    <div class="panel-body">
-                        <!--插入内容-->
-                        <div class="media-body" style="padding-left:12px;">
-                            <h4 class="media-heading" id="media-heading">
-                                <a href="https://shiyanlou.com">{{ companylist.name }}</a>
-                            </h4>
-                            <a class="company-site" target="_blank" rel="nofollow" href="#">{{ companylist.site }}</a>
-                            <p class="company-desc">{{ companylist.description }}</p>
+        <div class="row">
+            {% for companylist  in pagination.items %}
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                        <img src="https://soo9s.me/blogShow.jpg" alt="企业logo">
+                        <div class="caption">
+                            <h3>{{ companylist.name }}</h3>
+                            <p>{{ companylist.description }}</p>
+                            <p>
+                                <a href="{{ url_for('company.company_detail',id=companylist.id) }}"
+                                   class="btn btn-primary" role="button">查看企业详情</a>
+                            </p>
                         </div>
-
-                        <!--插入内容-->
                     </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
         <div class="row col-xs-12 col-md-3">
         </div>
     </div>
+    {{ render_pagination(pagination,'company.index') }}
 
-{{ render_pagination(pagination,'company.index') }}
 {% endblock %}
