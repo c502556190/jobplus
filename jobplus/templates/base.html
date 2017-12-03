@@ -34,7 +34,6 @@
             <ul class="nav navbar-nav navbar-right">
                 {% if not current_user.is_authenticated %}
                     <li><a href="{{ url_for('front.companyregister') }}">企业注册</a></li>
-                   
                     <li><a href="{{ url_for('front.userregister') }}">用户注册</a></li>
                     <li><a href="{{ url_for('front.login') }}">登录</a></li>
 
@@ -75,5 +74,16 @@
     <script src="{{ url_for('static',filename='js/jquery.min.js') }}"></script>
 
     <script src="{{ url_for('static',filename='js/bootstrap.min.js') }}"></script>
+
+{#    <script>#}
+{#        $(function () {#}
+{#            $('.navbar-nav li').click(function (e) {#}
+{#                e.preventDefault();#}
+{#                console.log($('a').click());#}
+{#                $(this).addClass('active').siblings().removeClass('active');#}
+{#            });#}
+{#        })#}
+{#    </script>#}
+
 {% endblock %}
 </html>

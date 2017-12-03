@@ -21,6 +21,20 @@ def delete(model, id=None):
     return False
 
 
+def get_alluser(page=None, current_app=None):
+    """
+    获取所有未逻辑删除用户
+    :return:
+    """
+    if (page,current_app) is not None:
+        return User.query.filter_by(deleted=0).paginate(
+            page=page,
+            per_page=current_app.config["ADMIN_PER_PAGE"],
+            error_out=False
+        )
+    return False
+
+
 def ban(model, id=None):
     """
     逻辑删除
@@ -68,7 +82,9 @@ def role_required(role):
             if not current_user.is_authenticated or current_user.role < role:
                 abort(404)
             return func(*args, **kwrargs)
+
         return wrapper
+
     return decorator
 
 

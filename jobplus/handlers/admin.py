@@ -3,7 +3,7 @@ from jobplus.models import (db, User)
 from jobplus.forms import (UserForm)
 from werkzeug.security import (generate_password_hash)
 
-from jobplus.decorator import (delete, ban, unban, admin_required)
+from jobplus.decorator import (delete, ban, unban, admin_required, get_alluser)
 
 admin = Blueprint('admin', __name__, url_prefix='/admin')
 
@@ -11,11 +11,13 @@ admin = Blueprint('admin', __name__, url_prefix='/admin')
 @admin.route('/')
 def index():
     page = request.args.get('page', default=1, type=int)
-    pagination = User.query.filter_by(deleted=0).paginate(
-        page=page,
-        per_page=current_app.config["ADMIN_PER_PAGE"],
-        error_out=False
-    )
+    pagination = get_alluser(page,current_app)
+    print(pagination)
+    # pagination = User.query.filter_by(deleted=0).paginate(
+    #     page=page,
+    #     per_page=current_app.config["ADMIN_PER_PAGE"],
+    #     error_out=False
+    # )
     return render_template('admin/user_config.html', pagination=pagination)
 
 

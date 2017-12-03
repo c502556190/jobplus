@@ -69,13 +69,6 @@ class User(Base, UserMixin):
         else:
             return "启用"
 
-    @property
-    def check_exist(self):
-        if self.deleted == 0:
-            return True
-        else:
-            return False
-
 
 class Resume(Base):
     """
