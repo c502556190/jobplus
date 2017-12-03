@@ -22,7 +22,7 @@
             <a class="navbar-brand" href="/">JOBPLUS</a>
         </div>
 
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse" id="navbar1"> {# bs-example-navbar-collapse-1 #}
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/">首页 <span class="sr-only">(current)</span></a></li>
                 <li><a href="{{ url_for('job.index') }}">职位</a></li>
@@ -77,13 +77,16 @@
     <script src="{{ url_for('static',filename='js/bootstrap.min.js') }}"></script>
 
 {#    <script>#}
-{#        $(function () {#}
-{#            $('.navbar-nav li').click(function (e) {#}
+{#        var $liStyle = $('.navbar-nav li')#}
+{#        var $urlLink = $('.navbar-nav li a')#}
+{#        $liStyle.click(#}
+{#            function (e) {#}
 {#                e.preventDefault();#}
-{#                console.log($('a').click());#}
-{#                $(this).addClass('active').siblings().removeClass('active');#}
-{#            });#}
-{#        })#}
+{#                console.log(1);#}
+{#                $(this).addClass('active').siblings().removeClass('active')#}
+{#            }#}
+{#        )#}
+{##}
 {#    </script>#}
 
 {% endblock %}

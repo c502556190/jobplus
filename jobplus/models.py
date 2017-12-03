@@ -154,6 +154,13 @@ class Jobs(Base):
     def __repr__(self):
         return '<Job {}>'.format(self.name)
 
+    @property
+    def is_active(self):
+        if self.active == 0:
+            return "下线"
+        else:
+            return "上线"
+
 
 class Company(Base):
     __tablename__ = 'company'

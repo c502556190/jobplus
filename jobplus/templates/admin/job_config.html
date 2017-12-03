@@ -1,0 +1,54 @@
+{% extends "admin/admin_base.html" %}
+{% from "macros.html" import render_pagination as pg %}
+{% block operation %}
+    <h2>
+        职位管理
+        <a class="btn btn-primary" href="#" style="margin-left: 70%" role="button"><span
+                class="glyphicon glyphicon-plus" aria-hidden="true"></span> 添加职位</a>
+
+    </h2>
+{% endblock %}
+
+{% block user %}
+    <div class="bs-example" data-example-id="striped-table">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>邮箱</th>
+                <th>用户类型</th>
+                <th>姓名</th>
+                <th>手机号</th>
+                <th>企业名称</th>
+                <th>企业网站</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for data in pagination.items %}
+                <tr>
+                    <th scope="row">{{ data.id }}</th>
+                    <td>{{ data.name }}</td>
+                    <td>Otto</td>
+                    <td>{{ data.username }}</td>
+                    <td>{{ data.phone }}</td>
+                    <td>企业名称</td>
+                    <td>企业网站</td>
+                    <td>
+                        <a class="btn-xs btn-info" href="{{ url_for('admin.user_edit',id=data.id) }}"
+                           role="button">编辑</a>
+                        {% if data.active == 0 and current_user.is_admin %}
+                        <a class="btn-xs btn-danger" href="{{ url_for('admin.job_disable',id=data.id) }}"
+                           role="button">{{ data.is_active }}</a>
+                        {% else %}
+                        <a class="btn-xs btn-success" href="{{ url_for('admin.job_enable',id=data.id) }}"
+                           role="button">{{ data.is_active }}</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {{ pg(pagination,'admin.jobs') }}
+{% endblock %}

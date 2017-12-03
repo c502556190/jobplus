@@ -47,6 +47,11 @@
     .cities {
         color: #407623;
     }
+
+    .btn-success {
+        margin-left: 60%;
+        margin-top: 25px;
+    }
     </style>
 
 {% endblock %}
@@ -95,6 +100,13 @@
                                         data-img="https://sfault-avatar.b0.upaiyun.com/195/823/1958237468-1040000000089436_huge100">javascript</a>
                 </li>
             </ul>
+        </div>
+        <div>
+            {% if status_flag == 0 %}
+            <a class="btn btn-success" href="{{ url_for('job.job_apply',id=job.id) }}" role="button">投递简历</a>
+            {% else %}
+            <a class="btn btn-success" disabled="disabled" role="button">已投简历</a>
+            {% endif %}
         </div>
     </div>
     <hr>

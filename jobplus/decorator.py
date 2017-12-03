@@ -37,7 +37,7 @@ def get_alluser(page=None, current_app=None):
 
 def ban(model, id=None):
     """
-    逻辑删除
+    禁用
     Author: little、seven
     :param model: Models类
     :param id: 要删除的id
@@ -54,7 +54,7 @@ def ban(model, id=None):
 
 def unban(model, id=None):
     """
-    逻辑删除
+    启用
     Author: little、seven
     :param model: Models类
     :param id: 要删除的id
