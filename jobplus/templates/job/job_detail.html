@@ -1,8 +1,107 @@
 {% extends "base.html" %}
 
 {% block title %}职位详情页{% endblock %}
+{% block b_css %}
+    <style>.row {
+        overflow: hidden;
+    }
+
+    .row img {
+        float: left;
+    }
+
+    .row h3 {
+        margin-left: 25px;
+    }
+
+    h3 a:link, h3 a:visited {
+        text-decoration: none;
+        color: black;
+    }
+
+    h3 a:hover {
+        text-decoration: none;
+
+    }
+
+    .row .jobs {
+        float: left;
+    }
+
+    .jobs ul {
+        list-style: none;
+        padding-left: 20px;
+        overflow: hidden;
+    }
+
+    .jobs ul li {
+        float: left;
+
+        margin: 0px 5px;
+    }
+
+    .salary {
+        color: #ffc81e;
+    }
+
+    .cities {
+        color: #407623;
+    }
+    </style>
+
+{% endblock %}
 
 {% block body %}
+    <div class="row">
+        <img src="https://soo9s.me/blogShow.jpg" alt="..." class="img-thumbnail"
+             style="float:left;width: 140px; height: 140px;">
+        <div class="jobs">
 
 
+            <h3>
+                <a href="">{{ job.name }}</a>
+            </h3>
+
+            <ul class="job-detail__requirements">
+                <li class="salary"><span>
+                    {{ job.salary_low }}k-{{ job.salary_high }}k
+                </span></li>
+                <li class="cities">
+                    {{ job.location }}
+                </li>
+                <li>
+                    {{ job.degree_requirement }}
+                </li>
+                <li>
+                    {{ job.experience_requirement }}
+                </li>
+                <li><span class="ml5 inline-block"></span></li>
+            </ul>
+            <ul class="taglist--inline mb0">
+                <li class="tagPopup"><a class="tag" href="/t/node.js" data-toggle="popover" data-placement="bottom"
+                                        data-original-title="jquery" data-id="1040000000089918"
+                                        data-img="https://sfault-avatar.b0.upaiyun.com/740/312/74031254-1040000000089918_huge100">node.js</a>
+                </li>
+                <li class="tagPopup"><a class="tag" href="/t/css" data-toggle="popover" data-placement="bottom"
+                                        data-original-title="jquery" data-id="1040000000089434"
+                                        data-img="https://sfault-avatar.b0.upaiyun.com/122/960/1229606535-1040000000089434_huge100">css</a>
+                </li>
+                <li class="tagPopup"><a class="tag" href="/t/html" data-toggle="popover" data-placement="bottom"
+                                        data-original-title="jquery" data-id="1040000000089571"
+                                        data-img="https://sfault-avatar.b0.upaiyun.com/418/365/4183652815-1040000000089571_huge100">html</a>
+                </li>
+                <li class="tagPopup"><a class="tag" href="/t/javascript" data-toggle="popover" data-placement="bottom"
+                                        data-original-title="jquery" data-id="1040000000089436"
+                                        data-img="https://sfault-avatar.b0.upaiyun.com/195/823/1958237468-1040000000089436_huge100">javascript</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <hr>
+    <div class="job-des">
+        <h4 style="color: red">职位描述</h4>
+        {{ job }}
+        <h4 style="color: red">职位要求</h4>
+        {{ job }}
+    </div>
 {% endblock %}

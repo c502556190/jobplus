@@ -2,7 +2,89 @@
 
 {% block title %}企业详情页{% endblock %}
 
+{% block b_css %}
+    <style>.row {
+        overflow: hidden;
+    }
+
+    .row img {
+        float: left;
+    }
+
+    .row h3 {
+        margin-left: 25px;
+    }
+
+    h3 a:link, h3 a:visited {
+        text-decoration: none;
+        color: black;
+    }
+
+    h3 a:hover {
+        text-decoration: none;
+
+    }
+
+    .row .jobs {
+        float: left;
+    }
+
+    .jobs ul {
+        list-style: none;
+        padding-left: 20px;
+        overflow: hidden;
+    }
+
+    .jobs ul li {
+        float: left;
+
+        margin: 0px 5px;
+    }
+
+    .salary {
+        color: #ffc81e;
+    }
+
+    .cities {
+        color: #407623;
+    }
+    </style>
+
+{% endblock %}
+
 {% block body %}
+    <div class="row">
+        <img src="https://soo9s.me/blogShow.jpg" alt="..." class="img-thumbnail"
+             style="float:left;width: 140px; height: 140px;">
+        <div class="jobs">
 
 
+            <h3>
+                <a href="">{{ company.name }}</a>
+            </h3>
+
+            <ul class="job-detail__requirements">
+                <li class="salary"><span>
+                </span></li>
+                {{ company }}
+                <li class="cities">
+                    {{ company }}
+                </li>
+                <li>
+                    1
+                </li>
+                <li>
+                    2
+                </li>
+                <li><span class="ml5 inline-block"></span></li>
+            </ul>
+            <ul class="taglist--inline mb0">
+                <li><a>1</a></li>
+            </ul>
+        </div>
+    </div>
+    <hr>
+    <div>
+    <h4 style="color: black">关于公司</h4>
+    </div>
 {% endblock %}
