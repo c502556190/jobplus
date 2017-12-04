@@ -30,13 +30,17 @@ def job_detail(id=None):
     :param id: 职位id
     :return:
     """
+    user_id = current_user.id
+
     if id != None:
         job = Jobs.query.get_or_404(int(id))
-        return render_template("job/job_detail.html", job=job)
+        dilivery_status = Dilivery.query.filter_by(user_id=user_id, job_id=id).first()
+        status = dilivery_status
+        return render_template("job/job_detail.html", job=job, status=status)
     return 404
 
 
-@job.route('/<int:id>/apply', methods=["GET"])
+@job.route('/<int:id>/apply', methods=["GET", "POST"])
 @login_required
 def job_apply(id=None):
     """
@@ -55,14 +59,6 @@ def job_apply(id=None):
         db.session.add(dilivery)
         db.session.commit()
         flash("简历已成功投递!", "success")
-        try:
-            dilivery_status = Dilivery.query.filter_by(user_id=user_id, job_id=job_id).count()
-            if dilivery_status >= 1:
-                status_flag = 1
-            else:
-                status_flag = 0
-        except Exception as e:
-            print(e)
+        return redirect(url_for('job.job_detail', id=job_id))
     except Exception:
         pass
-    return redirect(url_for('job.job_detail', id=job_id), status_flag)

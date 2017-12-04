@@ -17,7 +17,7 @@
                 <div class="thumbnail">
                     <img src="https://soo9s.me/blogShow.jpg" alt="职位图标">
                     <div class="caption">
-                        <h3>{{ data.name }}</h3>
+                        <h3><a href="{{ url_for('job.job_detail',id=data.id) }}" style="text-decoration: none;color: black">{{ data.name }}</a></h3>
                     </div>
                 </div>
             </div>

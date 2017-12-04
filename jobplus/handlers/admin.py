@@ -11,13 +11,13 @@ admin = Blueprint('admin', __name__, url_prefix='/admin')
 @admin.route('/')
 def index():
     page = request.args.get('page', default=1, type=int)
-    # pagination = get_alluser(page, current_app)
+    pagination = get_alluser(page, current_app)
     # print(pagination)
-    pagination = User.query.filter_by(deleted=0).paginate(
-        page=page,
-        per_page=current_app.config["ADMIN_PER_PAGE"],
-        error_out=False
-    )
+    # pagination = User.query.filter_by(deleted=0).paginate(
+    #     page=page,
+    #     per_page=current_app.config["ADMIN_PER_PAGE"],
+    #     error_out=False
+    # )
     return render_template('admin/user_config.html', pagination=pagination)
 
 
@@ -120,6 +120,11 @@ def company_add():
 
 @admin.route('/jobs/', methods=["GET", "POST"])
 def jobs():
+    """
+    职位管理
+    Author: little、seven
+    :return:
+    """
     page = request.args.get('page', default=1, type=int)
     pagination = Jobs.query.filter_by(deleted=0).paginate(
         page=page,
@@ -131,6 +136,12 @@ def jobs():
 
 @admin.route('/jobs/<int:id>/enable', methods=["GET", "POST"])
 def job_enable(id=None):
+    """
+    上线职位
+    Author: little、seven
+    :param id:
+    :return:
+    """
     job = Jobs.query.get_or_404(int(id))
     if job:
         job.active = 0
@@ -142,6 +153,12 @@ def job_enable(id=None):
 
 @admin.route('/jobs/<int:id>/disable', methods=["GET", "POST"])
 def job_disable(id=None):
+    """
+    下线职位
+    Author: little、seven
+    :param id:
+    :return:
+    """
     job = Jobs.query.get_or_404(int(id))
     if job:
         job.active = 1
