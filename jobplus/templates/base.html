@@ -26,9 +26,15 @@
             <ul class="nav navbar-nav">
                 <li class="{% if active == '/' %}active{% endif %}"><a href="/">首页</a></li>
                 <li class="{% if active == 'job' %}active{% endif %}"><a href="{{ url_for('job.index') }}">职位</a></li>
-                <li class="{% if active == 'company' %}active{% endif %}"><a href="{{ url_for('company.index') }}">企业</a></li>
+                <li class="{% if active == 'company' %}active{% endif %}"><a
+                        href="{{ url_for('company.index') }}">企业</a></li>
                 {% if current_user.is_authenticated and current_user.is_admin %}
-                    <li class="{% if active == 'console' %}active{% endif %}"><a href="{{ url_for('admin.index') }}">控制台</a></li>
+                    <li class="{% if active == 'console' %}active{% endif %}"><a
+                            href="{{ url_for('admin.index') }}">控制台</a></li>
+                {% endif %}
+                {% if current_user.is_authenticated and current_user.is_company or current_user.is_admin %}
+                    <li class="{% if active == 'job_admin_config' %}active{% endif %}"><a
+                            href="{{ url_for('job.job_config') }}">企业管理</a></li>
                 {% endif %}
             </ul>
             <ul class="nav navbar-nav navbar-right">

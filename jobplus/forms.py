@@ -327,3 +327,57 @@ class CompanyForm(FlaskForm):
     def validate_email(self, field):
         if User.query.filter_by(email=field.data).first():
             raise ValidationError('用户名已经存在')
+
+
+class JobAddForm(FlaskForm):
+    name = StringField(
+        label='职位名称',
+        validators=[
+            DataRequired("职位名称不能为空")
+        ]
+    )
+
+    salary = SelectField(
+        label="薪资",
+        validators=[
+            DataRequired("请选择薪资!"),
+        ],
+        coerce=int,
+        choices=[
+            (3, '1k-3k'),
+            (5, "3k-5k"),
+            (10, "5k-10k"),
+            (15, "10k-15k")
+
+        ]
+    )
+
+    experience = StringField(
+        label='经验要求',
+        validators=[
+            DataRequired("经验要求")
+        ]
+    )
+
+    job_des = TextAreaField(
+        label='职位描述',
+        validators=[
+            DataRequired("职位描述不能为空")
+        ]
+    )
+
+    job_ask = TextAreaField(
+        label='职位要求',
+        validators=[
+            DataRequired("职位要求不能为空!")
+        ]
+    )
+
+    location = StringField(
+        label='城市',
+        validators=[
+            DataRequired("城市名称不能为空")
+        ]
+    )
+
+    submit = SubmitField('添加')

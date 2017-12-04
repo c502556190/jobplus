@@ -1,0 +1,18 @@
+{% extends "job/job_base.html" %}
+
+{% from "macros.html" import render_forms %}
+
+{% block title %}新增职位{% endblock %}
+
+{% block operation %}
+    <h2>
+        新增职位
+        <a class="btn btn-primary" href="{{ url_for('job.job_config') }}" style="margin-left: 70%" role="button"><span
+                class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> 返回</a>
+
+    </h2>
+{% endblock %}
+
+{% block user %}
+    {{ render_forms(form,url_for('job.job_add')) }}
+{% endblock %}

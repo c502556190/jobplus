@@ -69,6 +69,10 @@ class User(Base, UserMixin):
         else:
             return "启用"
 
+    @classmethod
+    def get_alluser(self):
+        return User.query.filter_by(deleted=0).all()
+
 
 class Resume(Base):
     """
@@ -144,6 +148,8 @@ class Jobs(Base):
     tags = db.Column(db.String(128))
     experience_requirement = db.Column(db.String(32))
     degree_requirement = db.Column(db.String(32))
+    job_requirement = db.Column(db.String(255))
+    job_ask = db.Column(db.String(255))
     is_fulltime = db.Column(db.Boolean, default=True)
     # 是否在招聘
     is_open = db.Column(db.Boolean, default=True)

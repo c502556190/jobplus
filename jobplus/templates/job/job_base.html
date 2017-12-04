@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Jobs{% endblock %}
+
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-3">
+            <div class="list-group">
+                <a class="list-group-item" href="{{ url_for('job.job_config') }}">
+                    <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                    <span class="course__chapter__name">职位管理</span>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-9">
+        {% block operation %}{% endblock %}
+        <hr />
+            {% block user %}{% endblock %}
+        </div>
+
+    </div>
+
+{% endblock %}
