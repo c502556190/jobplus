@@ -33,13 +33,17 @@ def job_detail(id=None):
     :param id: 职位id
     :return:
     """
-    user_id = current_user.id
-
-    if id != None:
+    try:
+        user_id = current_user.id
+        if id != None:
+            job = Jobs.query.get_or_404(int(id))
+            dilivery_status = Dilivery.query.filter_by(user_id=user_id, job_id=id).first()
+            status = dilivery_status
+            return render_template("job/job_detail.html", job=job, status=status)
+    except Exception as e:
         job = Jobs.query.get_or_404(int(id))
-        dilivery_status = Dilivery.query.filter_by(user_id=user_id, job_id=id).first()
-        status = dilivery_status
-        return render_template("job/job_detail.html", job=job, status=status)
+        return render_template("job/job_detail.html", job=job, status=0)
+
     return 404
 
 
