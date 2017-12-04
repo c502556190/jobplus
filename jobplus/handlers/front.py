@@ -11,7 +11,8 @@ front = Blueprint('front', __name__, url_prefix='/')
 @front.route('/')
 def index():
     job = Jobs.query.filter_by(deleted=0).limit(6)
-    return render_template("front/index.html", job=job)
+    active = '/'
+    return render_template("front/index.html", job=job, active=active)
 
 
 @front.route('profile/', methods=["GET", "POST"])

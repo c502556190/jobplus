@@ -12,13 +12,14 @@ admin = Blueprint('admin', __name__, url_prefix='/admin')
 def index():
     page = request.args.get('page', default=1, type=int)
     pagination = get_alluser(page, current_app)
+    active = 'console'
     # print(pagination)
     # pagination = User.query.filter_by(deleted=0).paginate(
     #     page=page,
     #     per_page=current_app.config["ADMIN_PER_PAGE"],
     #     error_out=False
     # )
-    return render_template('admin/user_config.html', pagination=pagination)
+    return render_template('admin/user_config.html', pagination=pagination, active=active)
 
 
 @admin.route('/users/adduser', methods=["GET", "POST"])
