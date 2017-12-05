@@ -21,6 +21,11 @@ def index():
 @front.route('profile/', methods=["GET", "POST"])
 @login_required
 def profile():
+    """
+    上传简历
+    Author: little、seven
+    :return:
+    """
     form = UserProfileForm()
     if form.validate_on_submit():
         data = form.data
