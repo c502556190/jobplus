@@ -54,3 +54,11 @@ exit() # 退出
 - 企业列表
 
 ![企业列表](https://github.com/litt1eseven/python-project/blob/master/Company%20project/images/2017-12-02-093359-companylist.png)
+
+- 控制台
+
+![控制台](https://github.com/litt1eseven/python-project/blob/master/Company%20project/images/WX20171205-164753%402-2x.png)
+
+- 企业管理
+
+![企业管理](https://github.com/litt1eseven/python-project/blob/master/Company%20project/images/WX20171205-164354%402x.png)

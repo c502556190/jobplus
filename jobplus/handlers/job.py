@@ -1,9 +1,9 @@
-from flask import (Blueprint, request, current_app, flash, redirect, url_for)
-from flask import render_template
+import os
+from flask import (Blueprint, request, current_app, flash, redirect, url_for, render_template)
 from flask_login import (login_required, current_user)
-from jobplus.models import (db, Jobs, Dilivery, User)
+from jobplus.models import (db, Jobs, Dilivery)
 from jobplus.forms import (JobAddForm)
-from jobplus.decorator import (company_required)
+from jobplus.decorator import (company_required, delete)
 
 job = Blueprint('job', __name__, url_prefix='/job')
 
@@ -53,7 +53,7 @@ def job_apply(id=None):
     """
     投递简历
     Author: little、seven
-    :param id:
+    :param id: 职位的id
     :return:
     """
     user_id = current_user.id
@@ -77,7 +77,7 @@ def job_enable(job_id=None):
     """
     上线职位
     Author: little、seven
-    :param id: job_id
+    :param id: 职位的id
     :return:
     """
     job = Jobs.query.get_or_404(int(job_id))
@@ -95,7 +95,7 @@ def job_disable(job_id=None):
     """
     下线职位
     Author: little、seven
-    :param id:
+    :param id: 职位的id
     :return:
     """
     job = Jobs.query.get_or_404(int(job_id))
@@ -108,7 +108,13 @@ def job_disable(job_id=None):
 
 
 @job.route('/admin/', methods=["GET", "POST"])
+@company_required
 def job_config():
+    """
+    企业用户管理
+    Author: little、seven
+    :return:
+    """
     page = request.args.get('page', default=1, type=int)
     pagination = Jobs.query.filter_by(deleted=0).paginate(
         page=page,
@@ -116,11 +122,18 @@ def job_config():
         error_out=False
     )
     active = 'job_admin_config'
+    print()
     return render_template('job/job_admin_config.html', pagination=pagination, active=active)
 
 
 @job.route('/new/', methods=["GET", "POST"])
+@company_required
 def job_add():
+    """
+    添加职位
+    Author: little、seven
+    :return:
+    """
     form = JobAddForm()
     if form.validate_on_submit():
         data = form.data
@@ -138,7 +151,58 @@ def job_add():
 
 
 @job.route('/<int:job_id>/edit/', methods=["GET", "POST"])
+@company_required
 def job_edit(job_id=None):
+    """
+    编辑职位
+    :param job_id: 要编辑的职位id
+    Author: little、seven
+    :return:
+    """
     job = Jobs.query.get_or_404(int(job_id))
     if job:
         pass
+
+
+@job.route('/delete/<int:job_id>/', methods=["GET", "POST"])
+@company_required
+def job_delete(job_id=None):
+    """
+    删除职位(逻辑删除)
+    :param job_id: 要被删除的职位id
+    :return:
+    """
+    remove = delete(Jobs, job_id)
+    if remove:
+        flash("职位删除成功", "success")
+        return redirect(url_for("job.job_config"))
+
+
+@job.route('/apply/todolist/', methods=["GET", "POST"])
+def job_todolist():
+    """
+    简历：未处理列表
+    Author: little、seven
+    :return:
+    """
+    pass
+
+
+@job.route('/apply/reject/', methods=["GET", "POST"])
+def job_reject():
+    """
+    简历：拒绝按钮
+    Author: little、seven
+    :return:
+    """
+    pass
+
+
+@job.route('/apply/interview', methods=["GET", "POST"])
+def job_interview():
+    """
+    简历：面试按钮
+    Author: little、seven
+    :return:
+    """
+    pass

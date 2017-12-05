@@ -1,3 +1,7 @@
+import datetime
+import os
+import uuid
+
 from flask import abort
 from flask_login import (current_user)
 from functools import wraps
@@ -26,7 +30,7 @@ def get_alluser(page=None, current_app=None):
     获取所有未逻辑删除用户
     :return:
     """
-    if (page,current_app) is not None:
+    if (page, current_app) is not None:
         return User.query.filter_by(deleted=0).paginate(
             page=page,
             per_page=current_app.config["ADMIN_PER_PAGE"],
@@ -90,3 +94,15 @@ def role_required(role):
 
 company_required = role_required(User.ROLE_COMPANY)
 admin_required = role_required(User.ROLE_ADMIN)
+
+
+def change_filename(filename):
+    """
+    修改文件名称
+    :param filename:
+    :return:
+    """
+    fileinfo = os.path.splitext(filename)
+    filename = datetime.datetime.now().strftime("%Y%m%d%H%M%S") + \
+               str(uuid.uuid4().hex) + fileinfo[-1]
+    return filename

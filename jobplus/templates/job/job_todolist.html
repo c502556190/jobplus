@@ -1,0 +1,44 @@
+{% extends "job/job_base.html" %}
+{% from "macros.html" import render_pagination as pg %}
+
+{% block user %}
+    <div class="bs-example" data-example-id="striped-table">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>职位名称</th>
+                <th>用户类型</th>
+                <th>薪资</th>
+                <th>企业名称</th>
+                <th>企业网站</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for data in pagination.items %}
+                <tr>
+                    <th scope="row">{{ data.id }}</th>
+                    <td>{{ data.name }}</td>
+                    <td>Otto</td>
+                    <td>{{ data.salary_high }}</td>
+                    <td>企业名称</td>
+                    <td>企业网站</td>
+                    <td>
+                        <a class="btn-xs btn-info" href="{{ url_for('job.job_edit',job_id=data.id) }}"
+                           role="button">编辑</a>
+                        {% if data.active == 0 and current_user.is_admin %}
+                        <a class="btn-xs btn-danger" href="{{ url_for('job.job_disable',job_id=data.id) }}"
+                           role="button">{{ data.is_active }}</a>
+                        {% else %}
+                        <a class="btn-xs btn-success" href="{{ url_for('job.job_enable',job_id=data.id) }}"
+                           role="button">{{ data.is_active }}</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {{ pg(pagination,'job.job_config') }}
+{% endblock %}

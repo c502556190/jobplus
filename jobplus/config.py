@@ -1,3 +1,4 @@
+import os
 import pymysql
 
 
@@ -12,7 +13,8 @@ class DevelopmentConfig(BaseConfig):
     开发环境
     """
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root@127.0.0.1:3306/jobplus?charset=utf8'
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root@127.0.0.1:3306/jobplus?charset=utf8'  # mysql配置
+    UPLOAD_FOLDER = os.path.join(os.path.abspath(os.path.dirname(__file__)), "static/uploads/users/cv/")  # 用户简历目录
     SQLALCHEMY_TRACK_MODIFICATIONS = True
 
 
@@ -29,4 +31,3 @@ configs = {
     'production': ProductionConfig,
     'testing': TestingConfig
 }
-

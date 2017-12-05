@@ -210,7 +210,7 @@ class CompanyRegisterForm(FlaskForm):
 
 class UserRegisterForm(FlaskForm):
     """
-    author:little student
+    author:小学生
 
     increate forms
     """

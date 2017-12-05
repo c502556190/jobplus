@@ -37,6 +37,7 @@ class User(Base, UserMixin):
     username = db.Column(db.String(40), unique=True)
     email = db.Column(db.String(40), unique=True)
     phone = db.Column(db.Integer)
+    resume_url = db.String(db.String(255))
     _password = db.Column('password', db.String(256), nullable=False)
     role = db.Column(db.SmallInteger, default=ROLE_USER)
 

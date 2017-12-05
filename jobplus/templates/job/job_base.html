@@ -8,8 +8,20 @@
         <div class="col-md-3">
             <div class="list-group">
                 <a class="list-group-item" href="{{ url_for('job.job_config') }}">
-                    <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                    <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                     <span class="course__chapter__name">职位管理</span>
+                </a>
+                <a class="list-group-item" href="{{ url_for('job.job_config') }}">
+                    <span class="glyphicon glyphicon-sunglasses" aria-hidden="true"></span>
+                    <span class="course__chapter__name">未处理列表</span>
+                </a>
+                <a class="list-group-item" href="{{ url_for('job.job_config') }}">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    <span class="course__chapter__name">不合适列表</span>
+                </a>
+                <a class="list-group-item" href="{{ url_for('job.job_config') }}">
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                    <span class="course__chapter__name">面试列表</span>
                 </a>
             </div>
         </div>

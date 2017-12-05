@@ -1,9 +1,12 @@
-from flask import (Blueprint, render_template, flash, request)
-from jobplus.forms import (UserProfileForm)
-from jobplus.models import (db, User, Jobs)
+import os
+from flask import (Blueprint, render_template, flash, request, current_app)
 from flask_login import (login_user, logout_user, login_required)
 from flask import (redirect, url_for)
+from werkzeug.utils import secure_filename
 from jobplus.forms import (LoginForm, CompanyRegisterForm, UserRegisterForm)
+from jobplus.forms import (UserProfileForm)
+from jobplus.decorator import (change_filename)
+from jobplus.models import (db, User, Jobs)
 
 front = Blueprint('front', __name__, url_prefix='/')
 
@@ -20,7 +23,23 @@ def index():
 def profile():
     form = UserProfileForm()
     if form.validate_on_submit():
-        pass
+        data = form.data
+        file_fle = secure_filename(form.resume.data.filename)
+        if not os.path.exists(current_app.config["UPLOAD_FOLDER"]):
+            os.makedirs(current_app.config["UPLOAD_FOLDER"])
+            os.chmod(current_app.config["UPLOAD_FOLDER"], "rw")
+        resume = change_filename(file_fle)
+        form.resume.data.save(current_app.config["UPLOAD_FOLDER"] + resume)
+
+        user = User(
+            name=data["name"],
+            paswd=data["paswd"],
+            email=data["email"],
+            resume=resume
+        )
+        db.session.add(user)
+        db.session.commit()
+        flash("个人信息及简历成功更新", "success")
     return render_template('front/profile.html', form=form)
 
 
