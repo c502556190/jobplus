@@ -7,6 +7,17 @@ https://www.shiyanlou.com/louplus/python
 * [se7en](https://github.com/litt1eseven/jobplus)
 * [LI小学生](https://github.com/Jupiter001)
 * [LouPlus](https://github.com/LouPlus)
+
+**Docker部署**
+
+- `将整个项目克隆，进入jobplus`
+
+- `执行 ./build_docker.sh v(版本号)`
+
+- `等待执行完成，运行 docker run -p 80:5000 -d syl/jobplus:v(版本号)`
+
+- `目前还没有配合Nginx，使用会502在研究。。。`
+
 ## doc
 **下载对应的库：** 
 - `pip install -r requirements.txt`
