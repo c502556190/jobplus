@@ -8,6 +8,7 @@ https://www.shiyanlou.com/louplus/python
 * [LI小学生](https://github.com/Jupiter001)
 * [LouPlus](https://github.com/LouPlus)
 
+## deploy
 **Docker部署**
 
 - `将整个项目克隆，进入jobplus`
