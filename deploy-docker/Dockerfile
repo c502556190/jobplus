@@ -1,8 +1,6 @@
 # 使用Ubuntu镜像
-#这是我本地的
-FROM jobplus:latest
 #这是我的镜像仓库的，服务器部署需要用这个
-#FROM hub.c.163.com/jandand/ubuntu14:latest
+FROM hub.c.163.com/jandand/ubuntu14:latest
 # 作者信息
 MAINTAINER little seven <https://www.soo9s.com>
 # 安装supervisor && nginx
@@ -14,6 +12,7 @@ ENV source /home/job/bin/active
 
 # 将项目拷贝到home目录下
 COPY jobplus /home/job/jobplus
+RUN chmod -R 777 /home/job/jobplus
 # 安装相关依赖
 WORKDIR /home/job/jobplus
 RUN pip install -i https://pypi.douban.com/simple --upgrade pip
