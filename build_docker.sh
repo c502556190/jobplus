@@ -7,4 +7,4 @@ cp deploy-docker/Dockerfile ../
 cd ../
 docker build -t syl/jobplus:$1 .
 rm Dockerfile
-docker run -d -p 9000:80 --name syl_$1 syl/jobplus:$1
+docker run -d -p 80:5000 --name syl_$1 syl/jobplus:$1

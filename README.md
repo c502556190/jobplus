@@ -13,9 +13,11 @@ https://www.shiyanlou.com/louplus/python
 
 - `将整个项目克隆，进入jobplus`
 
-- `执行 ./build_docker.sh v(版本号)`
+- `需要先将数据库配置成远程的仓库`
 
-- `等待执行完成，运行 docker run -p 80:5000 -d syl/jobplus:v(版本号)`
+- `执行 ./build_docker.sh v1.0 (v版本号)`
+
+- `等待执行完成，运行 http://localhost 查看即可`
 
 - `目前还没有配合Nginx，使用会502在研究。。。`
 
