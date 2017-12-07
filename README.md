@@ -13,15 +13,13 @@ https://www.shiyanlou.com/louplus/python
 
 - `将整个项目克隆，进入jobplus`
 
-- `需要先将数据库配置成远程的仓库`
+- `特别注意：需要先将数据库配置成远程的仓库`
 
 - `执行 ./build_docker.sh v1.0 (v版本号)`
 
 - `等待执行完成，运行 http://localhost 查看即可`
 
-- `目前还没有配合Nginx，使用会502在研究。。。`
-
-## doc
+## doc(如果不用docker)
 **下载对应的库：** 
 - `pip install -r requirements.txt`
 
