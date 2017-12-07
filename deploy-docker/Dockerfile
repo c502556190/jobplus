@@ -1,5 +1,4 @@
-# 使用Ubuntu镜像
-#这是我的镜像仓库的，服务器部署需要用这个
+#自己制作的一个镜像，满足一些需求
 FROM hub.c.163.com/jandand/ubuntu14:latest
 # 作者信息
 MAINTAINER little seven <https://www.soo9s.com>
