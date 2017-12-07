@@ -1,6 +1,30 @@
 {% extends "base.html" %}
 <!-- Stack the columns on mobile by making one full-width and the other half-width -->
-{% block body %}
+{% block b_css %}
+    <style>
+        .list_more {
+            display: block;
+            width: 387px;
+            height: 42px;
+            line-height: 42px;
+            margin: 16px auto 0;
+            background: #FFF;
+            border: 1px solid #00B38A;
+            font-size: 16px;
+            color: #00b38a;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .list_more:hover {
+            color: #fff;
+            background: #00B38A;
+            text-decoration: none;
+
+        }
+    </style>
+{% endblock %}
+{% block header %}
     <div class="row">
         <div class="container">
             <div class="jumbotron">
@@ -9,23 +33,65 @@
             </div>
         </div>
     </div>
+{% endblock %}
+{% block body %}
     <hr>
-    <p style="color: red">热门职位*</p>
+    <ul class="nav nav-tabs list-title">
+        <li role="presentation" class="active"><a href="#">最新职位</a></li>
+    </ul>
     <div class="row">
-        {% for data in job %}
-            <div class="col-sm-6 col-md-4">
-                <div class="thumbnail">
-                    <img src="https://soo9s.me/blogShow.jpg" alt="职位图标">
-                    <div class="caption">
-                        <h3><a href="{{ url_for('job.job_detail',id=data.id) }}" style="text-decoration: none;color: black">{{ data.name }}</a></h3>
+
+        <div class="newest-job-list">
+            {% for i in range(5) %}
+                <div class="col-sm-6 col-md-4">
+                    <div class="job-box">
+                        <div class="media">
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="media-object"
+                                         src="https://static.lagou.com/thumbnail_200x200/i/image/M00/52/38/CgpEMll1iSeAOgfwAABEKfzbiWA625.png"
+                                         width="40" height="40" alt="...">
+                                </a>
+                            </div>
+                            <div class="media-body"><h4 class="media-heading">Media heading</h4>火球科技</div>
+                        </div>
                     </div>
+                    <div class="caption">
+                        <b>Python爬虫工程师  [2天前发布]</b>
+                        <p>经验1-3年 本科</p>
+                        <span class="label label-default">午餐补助</span>
+                        <span class="label label-default">带薪年假</span>
+                        <span class="label label-default">绩效奖金</span>
+                    </div>
+                    <hr>
+
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <a href="#" class="list_more">查看更多</a>
+
+    <ul class="nav nav-tabs list-title">
+        <li role="presentation" class="active"><a href="#">热门公司</a></li>
+    </ul>
+    <div class="row">
+        <div class="newest-company-list">
+            <div class="col-sm-6 col-md-3 company-item">
+                <div class="thumbnail">
+                    <img src="https://static.lagou.com/thumbnail_200x200/i/image/M00/52/38/CgpEMll1iSeAOgfwAABEKfzbiWA625.png"
+                         width="100" height="100" alt="...">
+                    <div class="caption">
+                        <h3>火球科技</h3>
+                        <p>移动互联网 不需要融资</p>
+                    </div>
+                    <hr>
+                    <p>在招职位：3</p>
                 </div>
             </div>
-        {% endfor %}
-        <div class="row col-xs-12 col-md-3"></div>
+        </div>
     </div>
-    <hr>
-    <div>
-    <p style="color: red;">热门企业*</p>
-    </div>
+    <a href="#" class="list_more">查看更多</a>
+{% endblock %}
+{% block footer %}
+    底部
 {% endblock %}
