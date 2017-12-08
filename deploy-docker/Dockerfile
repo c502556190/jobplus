@@ -29,7 +29,6 @@ RUN rm -rf /etc/nginx/sites-enabled/default
 ADD jobplus/deploy-docker/supervisord.conf /etc/supervisor/
 ADD jobplus/deploy-docker/jobplus /etc/nginx/sites-available/
 RUN ln -s /etc/nginx/sites-available/jobplus /etc/nginx/sites-enabled/jobplus
-RUN /usr/sbin/nginx
 
 # 启动supervisor
 CMD ["supervisord", "-n"]
