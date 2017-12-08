@@ -13,9 +13,9 @@ https://www.shiyanlou.com/louplus/python
 
 - `将整个项目克隆，进入jobplus`
 
-- `特别注意：需要先将数据库配置成远程的仓库`
+- `特别注意：数据库要配置正确`
 
-- `执行 ./build_docker.sh v1.0 (v版本号)`
+- `执行 ./build_docker.sh`
 
 - `等待执行完成，运行 http://localhost 查看即可`
 

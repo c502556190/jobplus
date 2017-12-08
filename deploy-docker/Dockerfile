@@ -13,12 +13,12 @@ RUN python3 -m venv /home/job
 # 激活虚拟环境
 ENV source /home/job/bin/active
 
-# 将项目拷贝到home目录下
-COPY jobplus /home/job/jobplus
-RUN chmod -R 777 /home/job/jobplus
-
+## 将项目拷贝到home目录下
+ADD jobplus/requirements.txt /home/job/
+ADD jobplus/deploy-docker/create_db.sh /home/job/
+RUN chmod -R 777 /home/job/
 # 安装相关依赖
-WORKDIR /home/job/jobplus
+WORKDIR /home/job/
 RUN pip install -i https://pypi.douban.com/simple --upgrade pip
 RUN pip install -i https://pypi.douban.com/simple gunicorn
 RUN pip install -i https://pypi.douban.com/simple -r requirements.txt

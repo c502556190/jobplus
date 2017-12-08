@@ -1,10 +1,6 @@
 #!/bin/bash
-if [ $# != 1 ] ; then
-  echo "USAGE: ./build_docker.sh v1.0.0"
-  exit 1;
-fi
 cp deploy-docker/Dockerfile ../
+cp deploy-docker/docker-compose.yml ../
 cd ../
-docker build -t syl/jobplus:$1 .
+docker-compose up -d --build
 rm Dockerfile
-docker run -d -p 80:80 --name syl_$1 syl/jobplus:$1
