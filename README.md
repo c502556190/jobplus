@@ -6,7 +6,6 @@ Jobs协同开发项目
 
 * [se7en](https://github.com/litt1eseven/jobplus)
 * [LI小学生](https://github.com/Jupiter001)
-* [LouPlus](https://github.com/LouPlus)
 
 ## deploy
 **Docker部署**
